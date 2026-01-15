@@ -1,0 +1,303 @@
+#home-hero.listing-page-hero {
+    background-image: url('/src/assets/images/banner-image/home-hero-banner.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 180px;
+    background-color: hsl(0deg 0% 0% / 50%);
+    background-blend-mode: overlay;
+}
+
+.search-hero h1 {
+    font-size: 38px !important;
+}
+
+.custom-dropdown {
+    width: 200px;
+    border: 1px solid #ccc;
+    font: var(--placeholder-text);
+    background-color: #fff;
+    background-position: right 0px center;
+    background-size: 40px 12px;
+}
+
+/* Range Slider CSS */
+
+.range-slider {
+    position: relative;
+    height: 35px;
+}
+
+.range-slider .slider-track {
+    position: absolute;
+    height: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ddd;
+    width: 100%;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.range-slider input[type="range"] {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    -webkit-appearance: none;
+    background: none;
+    height: 35px;
+    z-index: 2;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-color, #052c65);
+    border: none;
+    -webkit-appearance: none;
+}
+
+.range-slider input[type="range"]::-moz-range-thumb {
+    pointer-events: all;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-color, #052c65);
+    border: none;
+}
+
+/* Filter col css */
+.select-filter-box p,
+.clear-all-btn a {
+    font: var(--font600-text-16);
+}
+
+
+.filter-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.form-select {
+    font: var(--placeholder-text)
+}
+
+/* Top Rated Park Carousel CSS */
+.top_rated{
+    aspect-ratio: 4/3 !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 40px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    object-fit: cover;
+}
+
+#top-rated-park-owl.owl-carousel .item {
+    padding: 5px;
+}
+@media screen and (min-width: 425px) {
+    .lion {
+    width: 192.50px;
+    margin-right: 10px;
+}
+}
+.transition {
+    transition: all 0.4s ease;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 0px;
+}
+
+.park-info {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.park-card {
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.park-card:hover .park-info {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.park-card:hover .park-name {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.top-park-title {
+    font-size: 18px;
+    font-family: 'Spectral';
+    font-weight: 600 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-title small {
+    font: var(--placeholder-text)
+}
+
+.search-card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px !important;
+    font: var(--card-title);
+}
+
+.search-card .card-text p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font: var(--body-text) !important;
+}
+
+.park-info p {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    font-family: 'Inter';
+}
+
+.readmorearrow:hover i {
+    color: var(--accent-color) !important;
+}
+
+.readmorearrow i {
+    font-size: 14px;
+}
+
+#top-rated-park-owl .owl-dots {
+    margin-top: 30px;
+}
+
+
+/*Search Bar top*/
+.stylish-search input::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.stylish-search input {
+    border: 1px solid #ced4da;
+    border-right: none;
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.stylish-search button {
+    border-radius: 0 0.375rem 0.375rem 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stylish-search button:hover {
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#search-section .card-img-top img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+}
+
+/* Sticky sidebar for desktop */
+@media (min-width: 992px) {
+    .filter-sidebar-wrapper.filter-sidebar-wrapper-park {
+        background-color: unset !important;
+    }
+
+    .filter-sidebar-wrapper {
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+        max-height: calc(100vh - 20px);
+        overflow-y: auto;
+        font-size: 14px;
+        background-color: var(--muted-border-color) !important;
+    }
+
+    .filter-sidebar-wrapper::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    .filter-sidebar-wrapper::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 3px;
+    }
+}
+
+@media (max-width: 992px) {
+    .filter-sidebar-wrapper {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100vh;
+        background: #fff;
+        z-index: 1055;
+        overflow-y: auto;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .filter-sidebar-wrapper-park {
+        position: unset;
+        width: 100%;
+        height: 100%;
+        background: unset;
+        z-index: 1055;
+        overflow-y: auto;
+        transition: left 0.3s ease-in-out;
+        box-shadow: unset;
+    }
+
+    .filter-sidebar-wrapper.active {
+        left: 0;
+    }
+
+    .filter-sidebar-content {
+        position: relative;
+    }
+
+    .btn-close#closeFilter {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1060;
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-sidebar-wrapper {
+        width: 90%;
+    }
+
+    .custom-dropdown {
+        width: 100%;
+    }
+
+    #filter-box-section.listing-filter-box .filter-box {
+        margin: -60px 0px 0px;
+    }
+}

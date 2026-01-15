@@ -1,0 +1,173 @@
+       body {
+           overflow-x: hidden;
+       }
+
+       .login-wrapper {
+            background: url('../assets/images/coming-soon.jpeg') no-repeat center center;
+           background-size: cover;
+           /* background-repeat: no-repeat;
+           background-position: center; */
+            position: relative;
+            color: white;
+            background-color: hsl(0deg 0% 0% / 30%);
+            background-blend-mode: overlay;
+       }
+
+
+       .login-left {
+           color: white;
+           display: flex;
+           flex-direction: column;
+           overflow-y: auto;
+           max-height: 100vh;
+           align-items: center;
+           justify-content: center;
+       }
+
+       .login-form-box {
+           width: 100%;
+       }
+
+       .login-form-box h3 {
+           font-weight: 700;
+           margin-bottom: 30px;
+           color: white;
+       }
+
+       .login-btn:hover button {
+           color: #084f54 !important;
+       }
+
+       .login-btn:hover {
+           background: #fff;
+           box-shadow: 2px 3px 5px #084f54 !important;
+       }
+
+       .login-btn button {
+           font-size: 14px;
+       }
+
+
+       .login-btn {
+           background: var(--accent-color);
+           box-shadow: 2px 3px 5px #ababab !important;
+           vertical-align: text-bottom;
+           padding: 2px 4px !important;
+       }
+
+       .login-right {
+           position: sticky;
+           top: 0;
+           height: 100vh;
+           display: flex;
+           align-items: center;
+           justify-content: end;
+           padding: 20px;
+       }
+
+       .login-right img {
+           width: 90%;
+           max-width: 500px;
+       }
+
+       .user-store-form input,
+       .user-store-form select {
+           box-shadow: 2px 3px 5px #d35101 !important;
+           background-color: #fff !important;
+           font-size: 14px;
+       }
+
+       .login-left::-webkit-scrollbar {
+           width: 0px;
+       }
+
+       .login-left::-webkit-scrollbar-thumb {
+           background-color: #084f54;
+           border-radius: 10px;
+       }
+
+       .otp-input {
+           border: 1px solid #666;
+           border-radius: 3px;
+           transition: all .3s;
+           width: 50px;
+           height: 50px;
+           text-align: center;
+       }
+
+       @media (max-width: 992px) {
+           .login-container {
+               padding: 0 40px;
+           }
+
+           .login-left {
+
+               justify-content: unset;
+           }
+       }
+
+       @media (max-width: 850px) {
+           .otp-input {
+               width: 40px;
+               height: 40px;
+               padding: 0px;
+           }
+       }
+
+       @media (max-width: 768px) {
+
+           .login-left,
+           .login-right {
+               text-align: center;
+               padding: 20px;
+           }
+
+           .login-right img {
+               width: 50%;
+           }
+
+           .user-store-form .forminputbox {
+               width: 70%;
+               margin: 0 auto 30px;
+           }
+
+           .login-wrapper {
+               /* flex-direction: column; */
+               /* background-image: unset; */
+               background-color: var(--primary-color);
+               overflow: auto !important;
+           }
+
+           .login-container .row {
+               text-align: justify;
+           }
+
+           .login-right {
+               position: relative;
+               top: auto;
+               height: 100%;
+               display: block;
+           }
+
+           .login-left {
+               order: 2;
+               max-height: none;
+               overflow-y: visible;
+               justify-content: unset;
+           }
+       }
+
+       @media (max-width: 576px) {
+           .user-store-form .forminputbox {
+               width: 90%;
+               margin: 0 auto 30px;
+           }
+
+           .login-container {
+               padding: 0 10px;
+           }
+
+           .login-wrapper h2 {
+               font-size: 26px;
+           }
+       }

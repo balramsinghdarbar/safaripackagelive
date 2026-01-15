@@ -1,0 +1,661 @@
+@media screen and (min-width: 1440px) and (max-width: 1600px) {
+    .animal-image-container .big-img {
+        height: 450px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .key-info-img img {
+        height: 174px;
+        aspect-ratio: unset;
+        padding: 3px;
+        object-fit: cover;
+        margin: 0 auto;
+        background: var(--bs-border-color);
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .animal-image-container .small-img {
+        width: 200px;
+        aspect-ratio: 1/1;
+    }
+
+    /*.quickinfo-list li p {*/
+    /*    font: var(--link-regular-text); */
+    /*    font-size: 16px;*/
+    /*}*/
+
+    /*.quickinfo-list li span {*/
+    /*    font: var(--link-text);*/
+    /*    font-size: 16px;*/
+    /*    color: #696868 !important;*/
+    /*}*/
+}
+
+/* @media screen and (min-width: 1200px) {
+    .highlights-list div {
+        width: 110px;
+    }
+} */
+
+/* @media screen and (min-width: 992px) {
+    .highlights-list div {
+        width: 140px;
+    }
+} */
+
+/* @media screen and (min-width: 1400px) {
+    .highlights-list div {
+        width: 127px;
+    }
+} */
+
+@media screen and (max-width: 1400px) {
+
+    /* .highlights-list div {
+        width: 128px;
+    } */
+
+    #filter-box-section .filter-item {
+        width: 280px !important;
+    }
+
+    .quickinfo-list li p {
+        font: var(--placeholder-text);
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .nav-link,
+    #top-safari-park-owl .owl-item p,
+    .why-choose-text p,
+    .guest-review-container p,
+    body {
+        font: var(--font400-text-16)
+    }
+
+    #filter-box-section .filter-item {
+        width: 260px !important;
+    }
+
+    #top-safari-park-owl .owl-slide {
+        width: 280px;
+    }
+
+    #top-safari-park-owl .owl-item img {
+        width: 250px;
+        height: 250px;
+    }
+
+    #top-safari-park-owl .owl-item p {
+        -webkit-line-clamp: 3;
+    }
+
+    .recent-blogs-mobile {
+        height: 160px;
+    }
+
+    .right-image-col,
+    .park-donts-right {
+        flex-direction: column-reverse;
+    }
+
+    .left-image img {
+        aspect-ratio: 4/3;
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .left-image,
+    .vertical-image-col {
+        text-align: center;
+    }
+
+    .interesting-fact-icon {
+        height: 60px;
+    }
+
+
+    .vertical-image-col img {
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        width: 80%;
+    }
+
+    .appearance-box .vertical-image-col img {
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        width: 80%;
+    }
+
+    #home-hero.park-home-hero {
+        height: 300px;
+    }
+
+    .profile-img-wrapper img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .follow-list p,
+    .follow-list span {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .park-highlights .guest-reviews-section .guest-review-container .userimg {
+        height: 60px;
+        width: 60px !important;
+    }
+
+    .park-highlights .guest-reviews-section .guest-review-container p {
+        font-size: 14px;
+    }
+
+    .park-highlights .guest-review-container h6 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    #filter-box-section .filter-box {
+        max-width: 905px;
+    }
+
+    #filter-box-section .filter-item {
+        width: 238px !important;
+    }
+
+    button.search-button {
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .animal-image-container .big-img {
+        max-height: 450px;
+        width: auto;
+    }
+
+    .text-content-deal h3 {
+        font-size: 18px;
+    }
+
+    .dealsdiscount-container p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    #recent-blogs .card-title {
+        font-size: 18px;
+        margin-bottom: 0px !important;
+    }
+
+    #recent-blogs p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .recent-blogs-mobile {
+        height: 110px;
+    }
+
+    .container-padding,
+    .container-inner-padding {
+        padding: 0px 50px !important;
+    }
+
+    .stylish-search {
+        width: 45%;
+    }
+
+    .footer-logo img {
+        width: 20%;
+    }
+
+    /* .highlights-list div {
+        width: 115px;
+    } */
+
+    /* .highlights-list div {
+        width: 104px;
+    } */
+     
+}
+
+@media screen and (max-width: 860px) {
+    #search-section .card-img-top img {
+        height: 200px;
+    }
+
+    #filter-box-section .filter-item {
+        width: 200px !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    h3 {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .search-button {
+        width: 250px !important;
+    }
+
+    #top-safari-park-owl .owl-item p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    #top-safari-park-owl .owl-item img {
+        width: 200px;
+        height: 200px;
+    }
+
+    #top-safari-park-owl .owl-slide {
+        width: 230px;
+    }
+
+    .animal-image-container .small-img {
+        width: 120px;
+    }
+
+    .main-content-scroll {
+        margin-top: 0px;
+    }
+
+    .general-info-list {
+        border: 0px !important;
+    }
+
+    .park-highlights .guest-reviews-section .viewall-link {
+        position: unset;
+    }
+
+    .guest-carousel-wrapper .carousel-text {
+        padding: 5rem 2rem;
+        width: 90% !important;
+    }
+
+    .general-info-img img {
+        width: 100%;
+        aspect-ratio: 16/7;
+    }
+
+    #filter-box-section .filter-box {
+        padding: 47px 25px;
+    }
+
+    #filter-box-section .or-divider {
+        height: 35px;
+        width: 35px;
+        top: 45px;
+        left: 50%;
+    }
+
+    #filter-box-section .filter-item {
+        width: 80% !important;
+    }
+
+    #overview .filter-sidebar-wrapper {
+        width: 100% !important;
+    }
+
+    .key-info-img {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .stylish-search {
+        width: 70%;
+    }
+
+    .footer-logo img {
+        width: 30%;
+    }
+
+    /* .highlights-list div {
+        width: 145px;
+    } */
+    .social-icons .icon {
+        height: 20px;
+        width: 20px;
+    }
+
+    .social-icons .icon i {
+        font-size: 16px !important;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    .container-padding,
+    .container-inner-padding {
+        padding: 0px 16px !important;
+    }
+}
+
+@media screen and (max-width: 695px) {
+    #filter-box-section .filter-box {
+        padding: 30px 10px;
+    }
+
+    #general-info .general-info-list .list-paragraph,
+    .general-info-list .list-name {
+        font-size: 14px;
+    }
+
+    #ParkTabContent {
+        padding: 20px;
+    }
+
+    #ParkTabContent .heading-text h2 {
+        font-size: 24px !important;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        text-wrap: nowrap;
+        font-size: 14px;
+        padding: 10px !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    #keyinfo li {
+        font-size: 14px;
+    }
+
+    .season-card ul li,
+    .season-card p {
+        font: var(--font400-text-16);
+        font-size: 14px;
+    }
+
+    .navbar-brand img {
+        height: 40px;
+    }
+
+    #home-hero {
+        height: 300px;
+    }
+
+    .container-padding {
+        padding: 0px 15px !important;
+    }
+    .container-inner-padding {
+        padding: 0px 15px !important;
+    }
+    #top-safari-park-owl .owl-slide {
+        width: 100%;
+    }
+
+    .card-text {
+        font-size: 18px;
+    }
+
+    /* .highlights-list div {
+        width: 235px;
+    } */
+
+    .price-container a {
+        font-size: 14px;
+    }
+
+    #filter-box-section .filter-item {
+        width: 90% !important;
+    }
+
+    #filter-box-section .or-divider {
+        left: 47%;
+        top: 50px;
+    }
+
+    .vector-border-bottom {
+        width: 220px;
+    }
+
+
+    .animal-image-container .small-img {
+        width: 100px;
+    }
+
+    .species-big img,
+    .species-medium img {
+        width: 100%;
+        aspect-ratio: 3/2;
+    }
+
+    #guest-reviews .guest-review-container .userimg {
+        height: 60px;
+        width: 60px !important;
+        right: 20px;
+        top: -30px;
+    }
+
+    .guest-review-container h6 {
+        font: var(--font600-text-16);
+    }
+
+    #guest-reviews .guest-review-container p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .footer-ul li a {
+        font-size: 16px;
+    }
+
+    .footer-section h3 {
+        font-size: 18px;
+    }
+
+    .footer-section {
+        margin-top: 10px;
+    }
+
+    .footer-ul {
+        margin-bottom: 0px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .text-content-deal p {
+        font: var(--placeholder-text) !important;
+    }
+
+    #home-hero.listing-page-hero {
+        height: 200px;
+    }
+
+    #search-section .card-img-top img {
+        height: 250px;
+    }
+
+    #itineraryAccordion .accordion-header button,
+    #faqAccordion .accordion-header button {
+        font-size: 16px;
+    }
+
+    #itineraryAccordion li,
+    #faqAccordion li {
+        font-size: 14px;
+        padding-left: 0px;
+    }
+
+    ul#parkTab li a {
+        font-size: 14px;
+    }
+
+    .left-image img {
+        width: 100%;
+    }
+
+    .accordion-body ul li {
+        padding-left: 0px;
+        font-size: 14px;
+    }
+
+
+    .key-info-img {
+        width: 60%;
+    }
+
+    .promo-card {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .promo-card img.promo-img {
+        aspect-ratio: 4/3;
+        width: 40%;
+    }
+
+    #packageTab::-webkit-scrollbar,
+    #parkTab::-webkit-scrollbar,
+    #packageDetailNav::-webkit-scrollbar {
+        display: none;
+    }
+
+    #packageTab,
+    #parkTab,
+    #packageDetailNav {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #home-hero.park-home-hero {
+        height: 250px;
+    }
+
+    .accommodation-mobile-img {
+        aspect-ratio: 4/3;
+    }
+
+    #package-detail-slider.owl-carousel .owl-item img {
+        height: 55vh;
+    }
+
+    .guest-carousel-wrapper .carousel-text {
+        padding: 2rem 2rem;
+        font-size: 24px;
+    }
+
+    .fact-card p {
+        font: var(--placeholder-text);
+    }
+
+    .footer-logo img {
+        width: 50%;
+    }
+
+    .package-lists li,
+    .amenities span {
+        font-size: 14px;
+    }
+
+    .quickinfo-list li span {
+        font-size: 14px;
+    }
+
+    .quickinfo-list li p {
+        font-size: 14px;
+    }
+
+    img.profile-user-icon {
+        height: 40px;
+        width: 40px;
+    }
+
+    #profile-tabs-list .nav-pills .nav-link {
+        font-size: 16px;
+        padding: 5px;
+    }
+
+    .profile-username p {
+        font-size: 14px;
+    }
+    .secion-discussions a, .secion-discussions p, .comment-btn {
+    font-size: 14px;
+}
+img.profile-description-image {
+    height: 40px;
+    width: 40px;
+}
+
+}
+
+/* @media screen and (max-width: 550px) {
+.highlights-list div {
+    width: 220px;
+}
+} */
+/* @media screen and (max-width: 505px) {
+.highlights-list div {
+    width: 205px;
+}
+} */
+@media screen and (max-width: 500px) {
+    .margin-img {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .vertical-image-col img {
+        width: 100%;
+    }
+
+    .appearance-box .vertical-image-col img {
+        width: 100%;
+    }
+
+    .stylish-search {
+        width: 90%;
+    }
+
+    .footer-logo img {
+        width: 60%;
+    }
+
+    /* .highlights-list div {
+    width: 190px;
+} */
+}
+
+/* @media screen and (max-width: 460px) {
+.highlights-list div {
+    width: 180px;
+}
+} */
+@media screen and (max-width: 425px) {
+    .promo-card {
+        flex-direction: column;
+    }
+
+    .promo-card img.promo-img {
+        aspect-ratio: 4/3;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .key-info-img {
+        width: 100%;
+    }
+}

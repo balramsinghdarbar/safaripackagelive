@@ -1,0 +1,234 @@
+        .main-form-pages.coming-soon {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .main-form-pages .left-section {
+            background: url('../assets/images/coming-soon.jpeg') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: white;
+            background-color: hsl(0deg 0% 0% / 30%);
+            background-blend-mode: overlay;
+        }
+
+        @property --a {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        @property --i {
+            syntax: "<number>";
+            inherits: false;
+            initial-value: 0;
+        }
+
+        .main-form-pages .overlay-content {
+            padding: 30px;
+            border-radius: 30px;
+            border: 3px solid #ccc;
+            /* width: fit-content; */
+            background: rgba(0, 0, 0, 0.5);
+            --_a: 45deg;
+            --a: 0deg;
+            --i: 0;
+            mask:
+                conic-gradient(#000 0 0) content-box,
+                linear-gradient(calc(mod(var(--a), 180deg) * var(--i) + var(--_a, 45deg)),
+                    #0000 30%,
+                    #000 40% 60%,
+                    #0000 70%) subtract,
+                conic-gradient(#000 0 0) padding-box;
+            transition: --i 0.5s, --a 0s 0.5s;
+            cursor: pointer;
+        }
+
+        .main-form-pages.coming-soon:hover .overlay-content {
+            --i: 1;
+            --a: 15turn;
+            transition: --i 0s, --a 30s linear;
+        }
+
+
+        .main-form-pages .overlay-content h1 {
+            font-size: 40px;
+        }
+
+        .main-form-pages .shine-icon {
+            font-size: 24px;
+            background: linear-gradient(120deg, #ffffff 20%, #F59856 40%, #ffffff 60%);
+            background-size: 200% auto;
+            /* -webkit-background-clip: text; */
+            -webkit-text-fill-color: transparent;
+            animation: shineEffect 2s linear infinite;
+            animation: jumpInfinite 1.5s infinite;
+
+        }
+
+        @keyframes shineEffect {
+            0% {
+                background-position: 200% center;
+            }
+
+            100% {
+                background-position: -200% center;
+            }
+        }
+
+        .main-form-pages .notify-wrapper {
+            overflow: hidden;
+            padding: 10px;
+            border-radius: 33px;
+            transition: all 0.3s ease;
+            flex-wrap: wrap;
+        }
+
+        .main-form-pages .email-input-wrapper {
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            transition: all 0.4s ease;
+        }
+
+        .main-form-pages .email-input-wrapper.active {
+            opacity: 1;
+            visibility: visible;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .main-form-pages .email-input {
+            border-radius: 50px;
+            padding: 8px 16px;
+            background-color: #fff;
+            color: #000;
+            width: 100%;
+        }
+
+        .main-form-pages .social-icons-forms {
+            right: 40px;
+            bottom: 0px;
+        }
+
+        .main-form-pages .social-icons-forms::before {
+            content: "";
+            height: 150px;
+            width: 1px;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: -70%;
+        }
+            .btn:hover {
+    color: var(--bs-btn-hover-color) !important;
+    background-color: var(--bs-btn-hover-bg) !important;
+}
+        .main-form-pages .overlay-content p {
+            color: #ffffffed !important;
+        }
+
+        @media screen and (max-width:1200px) {
+            .main-form-pages .overlay-content img {
+                width: 80px;
+            }
+
+            .main-form-pages .social-icons-forms::before {
+                top: -80%;
+            }
+        }
+
+        @media screen and (max-width:800px) {
+
+            .main-form-pages .overlay-content h1 {
+                font-size: 30px;
+            }
+
+            .main-form-pages .overlay-content p {
+                font-size: 14px;
+            }
+
+            .main-form-pages .email-input {
+                font-size: 16px;
+            }
+
+            .main-form-pages a#notifyBtn {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width:767px) {
+            .main-form-pages .social-icons-forms {
+                left: 0;
+                right: 0;
+                justify-content: center;
+                gap: 30px !important;
+                background: black;
+                padding-top: 10px;
+            }
+
+            .main-form-pages .social-icons-forms::before {
+                content: unset;
+            }
+
+            .main-form-pages .overlay-content {
+                height: 100%;
+                width: 100%;
+                border: 0px;
+                border-radius: 0px;
+                display: flex;
+                align-items: center;
+            }
+
+            .main-form-pages.coming-soon:hover .overlay-content {
+                --i: 0;
+                --a: 0turn;
+                transition: --i 0s, --a 30s linear;
+            }
+
+        }
+
+        @media screen and (max-width:576px) {
+            .main-form-pages .overlay-content h1 {
+                font-size: 20px;
+            }
+
+            .main-form-pages .overlay-content p,
+            .main-form-pages .notify-btn,
+            .main-form-pages .email-input {
+                font-size: 12px;
+            }
+
+            .main-form-pages .notify-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+
+
+
+            .main-form-pages .notify-btn {
+                width: auto;
+                text-align: center;
+            }
+
+        }
+
+        @keyframes jumpInfinite {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .main-form-pages .overlay-content-min-width {
+            min-width: 50%;
+        }
