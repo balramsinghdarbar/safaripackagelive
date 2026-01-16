@@ -12,7 +12,7 @@ import '../../css/listingpages.css';
 import '../../css/package-listing-detail.css';
 import DetailImage from './DetailImage';
 import SafariPackagesTab from './SafariPackageTabs';
-import SimilarPackages from './SimilarPackages'
+import SimilarPackages from './SimilarPackages';
 export default function SharedSafariDetail() {
 
     return (

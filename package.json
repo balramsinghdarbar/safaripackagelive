@@ -25,10 +25,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.9.6",
     "react-select": "^5.10.2",
-    "react-select2": "^4.0.3",
     "react-slick": "^0.31.0",
     "react-toastify": "^11.0.5",
-    "select2": "^4.1.0-rc.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^8.4.7"
   },

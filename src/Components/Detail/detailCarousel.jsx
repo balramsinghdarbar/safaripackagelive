@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+// import { useEffect, useRef, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselImg1 from '../../assets/images/carousel-images/carousel-1.jpg';
@@ -19,7 +19,7 @@ export default function detailCarousel() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
-        arrows: false,
+        // arrows: false,
         responsive: [
             {
                 breakpoint: 1024,
