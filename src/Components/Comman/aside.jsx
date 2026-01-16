@@ -182,14 +182,14 @@ const Aside = ({
         setSelectedOption(option);
         console.log("Selected:", option);
     };
-    const handlespeciesChange = (specie) => {
-        setAnimal(specie);
-        console.log("Selected:", specie);
-    };
-    const handleparkChange = (park) => {
-        setPark(park);
-        console.log("Selected:", park);
-    };
+    // const handlespeciesChange = (specie) => {
+    //     setAnimal(specie);
+    //     console.log("Selected:", specie);
+    // };
+    // const handleparkChange = (park) => {
+    //     setPark(park);
+    //     console.log("Selected:", park);
+    // };
 
 
     return (
