@@ -91,85 +91,25 @@ const Aside = ({
             }
         };
 
-        // const fetchDatastate = async () => {
-        //     try {
-        //         const res = await api.get("/public/state");
-        //         const data = res.data?.data || [];
-
-        //         const mappedOptions = data.map(item => ({
-        //             value: item.state_id,
-        //             label: item.name,
-        //             fullData: item
-        //         }));
-
-        //         setOptions(mappedOptions);
-
-        //     } catch (err) {
-        //         console.error("API ERROR:", err);
-        //         setOptions([]);
-        //     }
-        // };
-        // const fetchDataspecies = async () => {
-        //     try {
-        //         const res = await api.get("/public/park/species");
-
-        //         console.log("RAW SPECIES DATA:", res.data?.data);
-
-        //         const data = res.data?.data || [];
-        //         console.log("FIRST ITEM:", data[0]);
-
-        //     } catch (err) {
-        //         console.error("API ERROR:", err);
-        //     }
-        // };
-
-        // const fetchDataspecies = async () => {
-        //     try {
-        //         const res = await api.get("/public/park/species");
-        //         // console.log(res.data.data);
-        //         const data = res.data?.data || [];
-
-        //         const mappedOptions = data.map((item) => ({
-        //             // value: item.id,
-        //             label: item.name,
-        //         }));
-
-        //         setSpecies(mappedOptions);
-
-        //     } catch (err) {
-        //         console.error("API ERROR:", err);
-        //         setSpecies([]);
-        //     }
-        // };
-        // const fetchDatapark = async () => {
-        //     try {
-        //         const res = await api.get("/public/get-national-parks");
-        //         // console.log("Raw park data:", res.data?.data);
-        //         const data = res.data?.data || [];
-
-        //         const mappedOptions = data.map((item) => ({
-        //             // value: item.id,
-        //             label: item.name,
-        //         }));
-
-        //         setParkoption(mappedOptions);
-
-        //     } catch (err) {
-        //         console.error("API ERROR:", err);
-        //         setParkoption([]);
-        //     }
-        // };
-
-
         fetchData();
         fetchDatainclusions();
         fetchDatathemes();
         fetchDatabudget();
         fetchDatacategory();
-        // fetchDatastate();
-        // fetchDataspecies();
-        // fetchDatapark();
     }, []);
+
+    const handleChange = (option) => {
+        setSelectedOption(option);
+        console.log("Selected:", option);
+    };
+    // const handlespeciesChange = (specie) => {
+    //     setAnimal(specie);
+    //     console.log("Selected:", specie);
+    // };
+    // const handleparkChange = (park) => {
+    //     setPark(park);
+    //     console.log("Selected:", park);
+    // };
 
 
     return (
