@@ -97,6 +97,29 @@ app.get("/public/shared-safari", async (req, res) => {
 
 });
 
+app.get("/public/safari-package", async (req, res) => {
+  try {
+    const { state_id, park_id, species_id } = req.query;
+
+    const response = await axios.get(
+      `${process.env.API_BASE_URL}/public/safari-package`,
+      {
+        params: {
+          state_id,
+          park_id,
+          species_id,
+        },
+      }
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch safari packages" });
+  }
+});
+
+
+
 app.get("/public/get-besttime-to-visit", async (req, res) => {
   try {
     const response = await axios.get(

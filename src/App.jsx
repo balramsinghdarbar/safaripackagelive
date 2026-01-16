@@ -5,7 +5,7 @@ import SharedSafari from './pages/SharedSafari';
 import ParkGuides from './pages/Park/ParkGuides';
 // import ParkDetail from './pages/Park/ParkDetail/park-details';
 import Species from './pages/Species/species';
-import Login from './pages/auth/login'
+import Login from './pages/auth/login';
 import Profile from './pages/auth/Profile/profile';
 import Editprofile from './pages/EditProfile/edit-profile';
 import Createsharedtour from './pages/CreateSharedTour/create-shared-tour';

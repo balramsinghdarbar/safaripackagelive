@@ -17,21 +17,19 @@ const SafariCard = ({ item, pkg }) => {
             return;
         }
 
-        pkg.park.wildlife.forEach((w, index) => {
-            console.log(`Species ${index}:`, w.species?.name);
-        });
+        // pkg.park.wildlife.forEach((w, index) => {
+        //     console.log(`Species ${index}:`, w.species?.name);
+        // });
+        //  pkg.park.wildlife.forEach((w, index) => {
+        //     console.log(`Species ${index}:`, w.species?.name);
+        // });
 
     }, [pkg]);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const imageUrl =
-    //     park?.display_image
-    //         ? `${import.meta.env.VITE_API_BASE_URLs}${park.display_image}`
-    //         : item?.display_image
-    //             ? `${import.meta.env.VITE_API_BASE_URLs}/assets/images/GPT-1.png`
-    //             : null;
+ 
     const imageUrl =
         pkg?.display_image
             ? pkg.display_image
@@ -41,7 +39,7 @@ const SafariCard = ({ item, pkg }) => {
                 ? item.display_image
                 : `${import.meta.env.VITE_API_BASE_URLs}/assets/images/GPT-1.png`;
 
-    console.log("Image URL:", imageUrl);
+    // console.log("Image URL:", imageUrl);
     const formatSlug = (slug = "") =>
         slug
             .replace(/-/g, " ")
@@ -82,7 +80,7 @@ const SafariCard = ({ item, pkg }) => {
         : item?.min_price_pp && item?.max_price_pp
             ? `₹${item.min_price_pp} - ₹${item.max_price_pp}`
             : "";
-    console.log("Price Range:", priceRange);
+    // console.log("Price Range:", priceRange);
     // const package_image = location.pathname === "/safari-packages";
     // const sharedsafari_image = location.pathname === "";
     // if (!item) return null;

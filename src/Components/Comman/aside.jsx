@@ -1,16 +1,19 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import Accordion from 'react-bootstrap/Accordion';
 import api from '../../api/api'
 import Select from 'react-select';
-
+import { useLocation } from "react-router-dom";
 const Aside = ({
     selectedState,
     selectedPark,
+    selectedSpecies,
+    stateOptions = [],
+    parkOptions = [],
+    speciesOptions = [],
     onStateChange,
     onParkChange,
-    selectedSpecies,
     onSpeciesChange,
 }) => {
     // const [selectedOption, setSelectedOption] = useState(null);
@@ -20,12 +23,13 @@ const Aside = ({
     const [budge, setBudget] = useState([]);
     const [category, setCategory] = useState([]);
     // const [tour, setTour] = useState([]);
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [options, setOptions] = useState([]);
-    const [park, setPark] = useState(null);
-    const [parkoption, setParkoption] = useState([]);
-    const [species, setSpecies] = useState([]);
+    // const [selectedOption, setSelectedOption] = useState([]);
+    // const [options, setOptions] = useState([]);
+    // const [park, setPark] = useState(null);
+    // const [parkoption, setParkoption] = useState([]);
+    // const [species, setSpecies] = useState([]);
 
+    const location = useLocation();
     const hideStayTheme = location.pathname === "/park-guides";
     const bestTime = location.pathname === "/safari-packages";
     const timeVisit = location.pathname === "/join-shared-safari";
@@ -87,24 +91,24 @@ const Aside = ({
             }
         };
 
-        const fetchDatastate = async () => {
-            try {
-                const res = await api.get("/public/state");
-                const data = res.data?.data || [];
+        // const fetchDatastate = async () => {
+        //     try {
+        //         const res = await api.get("/public/state");
+        //         const data = res.data?.data || [];
 
-                const mappedOptions = data.map(item => ({
-                    value: item.state_id,
-                    label: item.name,
-                    fullData: item
-                }));
+        //         const mappedOptions = data.map(item => ({
+        //             value: item.state_id,
+        //             label: item.name,
+        //             fullData: item
+        //         }));
 
-                setStateOptions(mappedOptions);
+        //         setOptions(mappedOptions);
 
-            } catch (err) {
-                console.error("API ERROR:", err);
-                setStateOptions([]);
-            }
-        };
+        //     } catch (err) {
+        //         console.error("API ERROR:", err);
+        //         setOptions([]);
+        //     }
+        // };
         // const fetchDataspecies = async () => {
         //     try {
         //         const res = await api.get("/public/park/species");
@@ -119,42 +123,42 @@ const Aside = ({
         //     }
         // };
 
-        const fetchDataspecies = async () => {
-            try {
-                const res = await api.get("/public/park/species");
-                // console.log(res.data.data);
-                const data = res.data?.data || [];
+        // const fetchDataspecies = async () => {
+        //     try {
+        //         const res = await api.get("/public/park/species");
+        //         // console.log(res.data.data);
+        //         const data = res.data?.data || [];
 
-                const mappedOptions = data.map((item) => ({
-                    // value: item.id,
-                    label: item.name,
-                }));
+        //         const mappedOptions = data.map((item) => ({
+        //             // value: item.id,
+        //             label: item.name,
+        //         }));
 
-                setSpecies(mappedOptions);
+        //         setSpecies(mappedOptions);
 
-            } catch (err) {
-                console.error("API ERROR:", err);
-                setSpecies([]);
-            }
-        };
-        const fetchDatapark = async () => {
-            try {
-                const res = await api.get("/public/get-national-parks");
-                // console.log("Raw park data:", res.data?.data);
-                const data = res.data?.data || [];
+        //     } catch (err) {
+        //         console.error("API ERROR:", err);
+        //         setSpecies([]);
+        //     }
+        // };
+        // const fetchDatapark = async () => {
+        //     try {
+        //         const res = await api.get("/public/get-national-parks");
+        //         // console.log("Raw park data:", res.data?.data);
+        //         const data = res.data?.data || [];
 
-                const mappedOptions = data.map((item) => ({
-                    // value: item.id,
-                    label: item.name,
-                }));
+        //         const mappedOptions = data.map((item) => ({
+        //             // value: item.id,
+        //             label: item.name,
+        //         }));
 
-                setParkoption(Options);
+        //         setParkoption(mappedOptions);
 
-            } catch (err) {
-                console.error("API ERROR:", err);
-                setParkoption([]);
-            }
-        };
+        //     } catch (err) {
+        //         console.error("API ERROR:", err);
+        //         setParkoption([]);
+        //     }
+        // };
 
 
         fetchData();
@@ -162,34 +166,10 @@ const Aside = ({
         fetchDatathemes();
         fetchDatabudget();
         fetchDatacategory();
-        fetchDatastate();
-        fetchDataspecies();
-        fetchDatapark();
+        // fetchDatastate();
+        // fetchDataspecies();
+        // fetchDatapark();
     }, []);
-
-    // const options = [
-    //     { state.name },
-    //     { value: 'strawberry', label: 'Strawberry' },
-    //     { value: 'vanilla', label: 'Vanilla' },
-    // ];
-
-
-    // const handleChange = (option) => {
-    //     setState(option.value);
-    //     setSelectedOption(option);
-    // }
-    const handleChange = (option) => {
-        setSelectedOption(option);
-        console.log("Selected:", option);
-    };
-    const handlespeciesChange = (specie) => {
-        setAnimal(specie);
-        console.log("Selected:", specie);
-    };
-    const handleparkChange = (park) => {
-        setPark(park);
-        console.log("Selected:", park);
-    };
 
 
     return (
@@ -208,14 +188,36 @@ const Aside = ({
                             <label htmlFor="stateSelect" className="form-label">Select State</label>
                             <Select
                                 className="select-state"
-                                value={selectedOption}
-                                onChange={handleChange}
-                                options={options}
-                                closeMenuOnSelect={false}
+                                value={selectedState}
+                                onChange={onStateChange}
+                                 closeMenuOnSelect={false}
+                                options={stateOptions}
                                 blurInputOnSelect={false}
                                 // menuIsOpen={true}
                                 placeholder="Select State"
                             />
+                            {/* <Select
+                                 className="select-state"
+                                value={selectedState}
+                                onChange={onStateChange}
+                                 closeMenuOnSelect={false}
+                                options={stateOptions}
+                                menuIsOpen={true}
+                                placeholder="Select State"
+                            /> */}
+                            {/* <Select
+                                placeholder="Select State"
+                                options={stateOptions.map(s => ({
+                                    value: s.id,
+                                    label: s.name
+                                }))}
+                                value={
+                                    stateOptions
+                                        .map(s => ({ value: s.id, label: s.name }))
+                                        .find(opt => opt.value === selectedState) || null
+                                }
+                                onChange={(option) => onStateChange(option?.value || null)}
+                            /> */}
                         </div>
 
                         {/* National Parks Selection  */}
@@ -225,11 +227,24 @@ const Aside = ({
                                 className="select-state"
                                 value={selectedPark}
                                 onChange={onParkChange}
-                                options={parkoption}
+                                options={parkOptions}
                                 closeMenuOnSelect={true}
                                 blurInputOnSelect={false}
                                 placeholder="Select an option"
                             />
+                            {/* <Select
+                                placeholder="Select Park"
+                                options={parkOptions.map(p => ({
+                                    value: p.id,
+                                    label: p.name
+                                }))}
+                                value={
+                                    parkOptions
+                                        .map(p => ({ value: p.id, label: p.name }))
+                                        .find(opt => opt.value === selectedPark) || null
+                                }
+                                onChange={(option) => onParkChange(option?.value || null)}
+                            /> */}
                         </div>
                         {/* Accordion Filters defaultActiveKey="0" */}
                         <Accordion id="filterAccordion" >
@@ -298,13 +313,27 @@ const Aside = ({
                                 <Select
                                     className="select-state"
                                     value={selectedSpecies}
-                                    options={species}
+                                    options={ speciesOptions}
                                     onChange={onSpeciesChange}
                                     closeMenuOnSelect={true}
                                     blurInputOnSelect={false}
                                     // menuIsOpen={true}
                                     placeholder="Select State"
                                 />
+                                {/* <Select
+                                    placeholder="Select Species"
+                                    options={speciesOptions.map(sp => ({
+                                        value: sp.id,
+                                        label: sp.name
+                                    }))}
+                                    value={
+                                        speciesOptions
+                                            .map(sp => ({ value: sp.id, label: sp.name }))
+                                            .find(opt => opt.value === selectedSpecies) || null
+                                    }
+                                    onChange={(option) => onSpeciesChange(option?.value || null)}
+                                /> */}
+
 
                             </div>
                             {/* Best Time */}

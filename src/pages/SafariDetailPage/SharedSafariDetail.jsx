@@ -4,15 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../../Components/Layout/Header';
 import Footer from '../../Components/Layout/Footer';
 import DetailCarousel from '../../Components/Detail/detailCarousel';
-import '../../css/style.css';
-import '../../css/responsive.css';
-import '../../css/full-forms.css';
-import '../../css/all-form.css';
-import '../../css/listingpages.css';
-import '../../css/package-listing-detail.css';
-import DetailImage from './Detailimage';
+import DetailImage from './DetailImage';
 import SafariPackagesTab from './SafariPackageTabs';
-import SimilarPackages from './SimilarPackages'
+import SimilarPackages from './SimilarPackages';
 export default function SharedSafariDetail() {
 
     return (

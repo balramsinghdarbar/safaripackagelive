@@ -7,7 +7,7 @@ import ParkCard from '../../Components/Comman/park-safari-card';
 import Aside from '../../Components/Comman/aside';
 import TopRated from '../../Components/Comman/TopRated';
 import CommanBanner from "../../Components/Comman/CommanBanner";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 export default function ParkGuides() {
 
 // const { speciesId } = useParams(); // 🔥 dynamic, URL clean
