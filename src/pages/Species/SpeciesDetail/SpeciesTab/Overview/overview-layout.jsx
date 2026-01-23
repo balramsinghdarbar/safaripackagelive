@@ -1,7 +1,7 @@
 import { NavLink, useParams, Outlet, useOutletContext } from "react-router-dom";
 import { Row, Col, Nav } from "react-bootstrap";
 import Sidebar from "../Overview/sidebar";
-import { useState, useRef } from "react";
+import {  useRef } from "react";
 export default function OverviewLayout() {
   const { id } = useParams();
   const tabRefs = useRef([]);;

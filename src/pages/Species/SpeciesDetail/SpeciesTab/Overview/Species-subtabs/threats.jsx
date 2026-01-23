@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../../../../../api/api";
 
-export default function threats() {
+export default function Threats() {
 
   const { id, tabId, charId } = useParams();
   // const [threats, setThreats] = useState(null);
@@ -25,12 +25,11 @@ export default function threats() {
       })
       .catch(console.error);
 
-  }, [id, tabId]); // ✅ tabId dependency REQUIRED
+  }, [id, tabId,charId]); // ✅ tabId dependency REQUIRED
 
   console.log("Threats data:", content);
   console.log("Short desc:", content?.short_description);
 
-  if (!threats) return <p>Loading threats...</p>;
   return (
     <>
       <div>

@@ -1,4 +1,4 @@
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../../../../../api/api";
 import { Row, Col } from "react-bootstrap";

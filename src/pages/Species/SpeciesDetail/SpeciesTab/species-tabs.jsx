@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../../../../api/api'
 import { Nav } from "react-bootstrap";
 import { NavLink, Outlet, useParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import Sepciesrated from "../../../Species/SpeciesDetail/SpeciesTab/species-rate
 const navLinkStyles = ({ isActive }) => ({
     color: isActive ? '#f27a3b' : ' #1D4358',
 });
-export default function speciestabs() {
+export default function Speciestabs() {
     const { id } = useParams();
     const [tabs, setTabs] = useState([]);
 

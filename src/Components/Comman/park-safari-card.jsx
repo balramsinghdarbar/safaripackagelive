@@ -1,20 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useLocation, useNavigate } from "react-router-dom";
 import api from "../../api/api";
-import { useParams } from "react-router-dom";
 export default function Parksafari() {
 
     const [parks, setParks] = useState([]);
-    // const [tabs, setTabs] = useState([]);
-    // console.log("parks:", parks);
     const [buffer, setBuffer] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
-    const [speciesName, setSpeciesName] = useState("");
     
     const fetchParks = async (pageNo, species_id) => {
         const res = await api.get("/public/park", {
@@ -24,36 +20,8 @@ export default function Parksafari() {
             },
             
         });
-        // console.log("Species ID passed:", species_id);
         return res.data?.data || [];
     };
-
-    // const fetchParks = async (pageNo, species_id) => {
-    //     const res = await api.get("/public/park", {
-    //         params: {
-    //             page: pageNo,
-    //             species_id: species_id,
-    //         },
-    //     });
-    //     const species = res.data?.data?.find(
-    //         sp => sp.species_id === species_id
-    //     );
-    //     console.log("Species name:", species?.name);
-    //     console.log("Species ID passed:", species_id);
-    //     return res.data?.data || [];
-    // };
-    // const fetchSpeciesName = async (species_id) => {
-    //     const res = await api.get("/public/park/park-species");
-
-    //     const species = res.data?.data?.find(
-    //         sp => sp.species_id === species_id
-    //     );
-
-    //     console.log("Matched species:", species?.species_id);
-    //     console.log("Species name:",  species?.name);
-
-    //     setSpeciesName(species?.name || "");
-    // };
 
 
     useEffect(() => {
@@ -68,13 +36,11 @@ export default function Parksafari() {
     }, []);
 
     useEffect(() => {
-        if (!speciesName) return;
+        if (!parks) return;
 
         fetchParks(1).then((data) => {
             setParks(data.slice(0, 6));
         });
-
-        // fetchSpeciesName(speciesName);
     }, []);
 
 
@@ -155,13 +121,11 @@ export default function Parksafari() {
     const location = useLocation();
     const navigate = useNavigate();
     let showButton = false;
-    let buttonText = "";
     let navigateTo = "";
 
     switch (location.pathname) {
 
         case "/park-guides":
-            buttonText = "View Details";
             showButton = true;
             navigateTo = "/park-detail";
             break;

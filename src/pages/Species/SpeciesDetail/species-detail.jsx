@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Speciessidetabs from "./SpeciesTab/species-tabs";
 import Header from "../../../Components/Layout/Header";
 import Footer from "../../../Components/Layout/Footer";

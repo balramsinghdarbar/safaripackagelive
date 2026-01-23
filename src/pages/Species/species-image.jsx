@@ -59,10 +59,7 @@ navigate(`/species/${species_id}`);
                                     : data[i].display_image }
                                 alt={data[i].name}
                                 onLoad={() => setImgLoaded(true)}
-                                // onError={(e) => {
-                                //     //   e.target.src = "/images/placeholder.jpg";
-                                    // setImgLoaded(true);
-                                // }}
+                               
                                onClick={() => goToSpeciesDetail()}
                                 className={`img-fluid ${!imgLoaded ? "d-none" : ""}`}
                                 style={{ cursor: "pointer" }}
