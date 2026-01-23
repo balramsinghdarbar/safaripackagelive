@@ -1,16 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../../../../api/api'
 import { Nav } from "react-bootstrap";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Sepciesrated from "../../../Species/SpeciesDetail/SpeciesTab/species-rated";
 const navLinkStyles = ({ isActive }) => ({
     color: isActive ? '#f27a3b' : ' #1D4358',
 });
-export default function speciestabs() {
-    const { id } = useParams();
+export default function Speciestabs({ speciesId }) {
+    // console.log("slug in tabs:", slug);
+     console.log("speciesId in tabs:", speciesId);
     const [tabs, setTabs] = useState([]);
-
+    
     useEffect(() => {
         api.get(`/public/species/bengal-tiger`)
             .then(res => {
@@ -24,14 +25,12 @@ export default function speciestabs() {
     }, []);
     return (
         <>
-            {/* Tabs Navigation */}
             <section id="package-details-nav" className="mb-4 border-bottom">
                 <div className="container-lg container-inner-padding">
                     <div className="overflow-auto">
                         <Nav variant="pills" className="main-tabs flex-nowrap  gap-2" >
 
-                            <NavLink to={`/species/${id}/overview`}
-                                // className="fw-semibold bg-white nav-link" style={navLinkStyles}
+                            <NavLink to={`/species/${speciesId}/overview`}
                                 className={({ isActive }) =>
                                     isActive
                                         ? "nav-link active"
@@ -39,11 +38,11 @@ export default function speciestabs() {
                                 }>
                                 Overview
                             </NavLink>
-                            <NavLink to={`/species/${id}/packages`}
+                            <NavLink to={`/species/${speciesId}/packages`}
                                 className="fw-semibold rounded-pill nav-link" style={navLinkStyles}>
                                 Packages
                             </NavLink>
-                            <NavLink to={`/species/${id}/species-safaris`}
+                            <NavLink to={`/species/${speciesId}/species-safaris`}
                                 className="fw-semibold rounded-pill nav-link">
                                 Shared Safaris
                             </NavLink>
@@ -54,7 +53,7 @@ export default function speciestabs() {
             <div className="container-lg container-inner-padding mb-5">
                 <div className="tab-content" id="ParkTabContent">
                     <div>
-                        <Outlet context={{ tabs }} />
+                        <Outlet context={{ tabs,speciesId }} />
                     </div>
                     <div>
                         <Sepciesrated />

@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import api from "../../../../../../api/api";
 import bluevectorImg from '../../../../../../assets/images/blue-border-vector.png';
 import { Row, Col } from "react-bootstrap";
+import { useOutletContext } from "react-router-dom";
 export default function PhysicalAppearanceHabitat() {
-  const { id, tabId, charId } = useParams();
+  const {  tabId, charId } = useParams();
   const [content, setContent] = useState(null);
-
+const { speciesId } = useOutletContext();
+  console.log("overview:",speciesId);
   useEffect(() => {
-    if (!id || !tabId || !charId) return;
+    if (!speciesId || !tabId || !charId) return;
 
     api
-      .get(`/public/species/tab/${id}`, {
+      .get(`/public/species/tab/${speciesId}`, {
         params: {
           species_details_characterstic_id: tabId,
           species_characterstics: charId,
@@ -22,7 +24,7 @@ export default function PhysicalAppearanceHabitat() {
         setContent(res.data.data);
       })
       .catch(console.error);
-  }, [id, tabId, charId]);
+  }, [speciesId, tabId, charId]);
 
   if (!content) return <p>Loading Physical Appearance...</p>;
 

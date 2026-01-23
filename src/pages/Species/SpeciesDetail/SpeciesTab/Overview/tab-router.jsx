@@ -7,7 +7,7 @@ import Lesserknownfacts from "./Species-subtabs/lesser-known-facts";
 import Conservationstatus from "./Species-subtabs/conservation-status";
 export default function TabRouter() {
   const { charId } = useParams();
-
+console.log("params:", useParams());
   if (charId === "1") return <Overview />;
   if (charId === "2") return <PhysicalAppearanceHabitat />;
   if (charId === "4") return <Threats />;
