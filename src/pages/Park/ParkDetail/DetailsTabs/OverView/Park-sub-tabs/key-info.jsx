@@ -1,17 +1,73 @@
 import bluevectorImg from '../../../../../../assets/images/blue-border-vector.png';
-import blogImg1 from '../../../../../../assets/images/animal-images/blog-1.png';
-import speciesImg2 from '../../../../../../assets/images/animal-images/species-2.png';
-import birdImg1 from '../../../../../../assets/images/animal-images/bird-1.png';
-export default function keyinfo() {
+import api from '../../../../../../api/api';
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { usePark } from "../../OverView/ParkContext";
+const KeyInfo = () => {
+    const { slug, park_id, park_tabs_id } = useParams();
+    const [keyinfo, setKeyInfo] = useState();
+    const [keyimage, setKeyImage] = useState();
+    const { safariTypes, bestTimes } = usePark();
+    useEffect(() => {
+        if (!slug) return;
+        const fetchDataKeyInfo = async () => {
+            try {
+                const res = await api.get(`/public/park/details/${slug}`);
 
+                if (!res.data?.success) return;
+
+                const data = res.data.data || {};
+                setKeyInfo(data);
+            } catch (err) {
+                console.error("API ERROR:", err);
+            }
+        };
+        const fetchDataInfo = async () => {
+            try {
+                const res = await api.get("/public/park/tabs/details", {
+                    params: {
+                        park_id,
+                        park_tabs_id,
+                    },
+                });
+
+                if (!res.data?.success) return;
+
+                const data = res.data.data || {};
+
+
+                setKeyImage(data);
+            } catch (err) {
+                console.error("API ERROR:", err);
+            }
+        };
+        fetchDataKeyInfo();
+        fetchDataInfo();
+    }, [slug, park_id, park_tabs_id]);
+
+    const overview = keyimage?.park_key_info?.overview_image
+        ? keyimage.park_key_info.overview_image.startsWith("http")
+            ? keyimage.park_key_info.overview_image
+            : `${import.meta.env.VITE_API_BASE_URLs}${keyimage.park_key_info.overview_image}`
+        : "";
+
+    const travelInfo = keyimage?.park_key_info?.travel_info_image
+        ? keyimage.park_key_info.travel_info_image.startsWith("http")
+            ? keyimage.park_key_info.travel_info_image
+            : `${import.meta.env.VITE_API_BASE_URLs}${keyimage.park_key_info.travel_info_image}`
+        : "";
+    const TimingCost = keyimage?.park_key_info?.timing_cost_image
+        ? keyimage.park_key_info.timing_cost_image.startsWith("http")
+            ? keyimage.park_key_info.timing_cost_image
+            : `${import.meta.env.VITE_API_BASE_URLs}${keyimage.park_key_info.timing_cost_image}`
+        : "";
     return (
         <>
-            {/* <Tab.Pane eventKey="link-4"> */}
             <div className="tab-pane fade show active" id="keyinfo" role="tabpanel"
                 aria-labelledby="keyinfo-tab">
                 <div className="heading-text text-center mb-xl-4 mb-3">
                     <div className="">
-                        <h2 className="mb-0 text-accent">Key Information</h2>
+                        <h2 className="mb-0 text-accent">Kanha National Park & Kanha Tiger Reserve</h2>
                         <img src={bluevectorImg} alt="Vector-Border" className="vector-border-bottom" />
                     </div>
                     <h3 className="text-center fw-bold text-blue mb-sm-5 mb-3">Kanha National Park</h3>
@@ -30,33 +86,37 @@ export default function keyinfo() {
                                         </li>
                                         <li><strong
                                             className="primary-color-muted">Established:</strong>
-                                            1st June 1955</li>
-                                        <li><strong className="primary-color-muted">Area:</strong> 1,949
-                                            sq.km</li>
+                                            {keyinfo?.established}    </li>
+                                        <li><strong className="primary-color-muted">Area:</strong>{keyinfo?.area}</li>
                                         <li><strong className="primary-color-muted">Famous For:</strong>
-                                            Barasingha, Bengal Tigers
+                                            {keyinfo?.famous_for}
                                         </li>
-                                        <li><strong className="primary-color-muted">Best Time:</strong>
-                                            October to February, March to June
+                                        <li>
+                                            <strong className="primary-color-muted">Best Time:</strong>
+                                            {bestTimes.map(b => b.weather).join(", ")}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4 mb-md-0 mb-3">
-                            <div className="img-1 rounded-2 bg-blue  key-info-img">
-                                <img src={blogImg1} alt="Animal"
-                                    className="img-fluid rounded-2" />
+                        {overview && (
+                            <div className="col-md-4 mb-md-0 mb-3">
+                                <div className="img-1 rounded-2 bg-blue  key-info-img">
+                                    <img src={overview} alt="Animal"
+                                        className="img-fluid rounded-2" />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                     <div className="row mb-3 gx-2 align-items-center">
-                        <div className="col-md-4 mb-md-0 mb-3">
-                            <div className="img-1 rounded-2 bg-blue  key-info-img">
-                                <img src={speciesImg2} alt="Animal"
-                                    className="img-fluid rounded-2" />
+                        {travelInfo && (
+                            <div className="col-md-4 mb-md-0 mb-3">
+                                <div className="img-1 rounded-2 bg-blue  key-info-img">
+                                    <img src={travelInfo} alt="Animal"
+                                        className="img-fluid rounded-2" />
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className="col-md-8">
                             <div className="card shadow-sm">
                                 <div className="card-body">
@@ -65,15 +125,14 @@ export default function keyinfo() {
                                         and Travel Info</h5>
                                     <ul className="list-unstyled small mb-0">
                                         <li><strong className="primary-color-muted">Safari
-                                            Types:</strong> Jeep, Canter, Boat</li>
+                                            Types:</strong>{safariTypes.map(s => s.type).join(", ")}</li>
                                         <li><strong className="primary-color-muted">Core Zones:</strong>
-                                            Kanha, Mukki, Kisli, Sarhi
+                                            {keyinfo?.core_zone}
                                         </li>
                                         <li><strong className="primary-color-muted">Entry
-                                            Gates:</strong> Mukki, Khatia, Sarhi</li>
+                                            Gates:</strong> {keyinfo?.entry_gates}</li>
                                         <li><strong className="primary-color-muted">Nearest Railway
-                                            Station:</strong> Gondia,
-                                            Jabalpur
+                                            Station:</strong> {keyinfo?.nearest_railway}
                                         </li>
                                     </ul>
                                 </div>
@@ -90,25 +149,25 @@ export default function keyinfo() {
                                         Cost</h5>
                                     <ul className="list-unstyled small mb-2">
                                         <li><strong className="primary-color-muted">Safari
-                                            Timings:</strong>Morning: 6:00 AM -
-                                                11:30
-                                                AM
-                                            Afternoon: 3:00 PM - 6:00 PM</li>
+                                            Timings:</strong><br />Morning:{keyinfo?.morning_time}<br />
+                                            Afternoon: {keyinfo?.afternoon_time}</li>
                                     </ul>
                                     <p className="small mb-0">
                                         <strong className="primary-color-muted">Cost:</strong>
-                                        ₹7,500–₹8,500 (Core), ₹6,000–₹6,500
+                                        {keyinfo?.core_zone_price}(Core), {keyinfo?.buffer_zone_price}
                                         (Buffer)
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4 mb-md-0 mb-3">
-                            <div className="img-1 rounded-2 bg-blue  key-info-img">
-                                <img src={birdImg1} alt="Animal"
-                                    className="img-fluid rounded-2" />
+                        {TimingCost && (
+                            <div className="col-md-4 mb-md-0 mb-3">
+                                <div className="img-1 rounded-2 bg-blue  key-info-img">
+                                    <img src={TimingCost} alt="Animal"
+                                        className="img-fluid rounded-2" />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                 </div>
@@ -117,3 +176,5 @@ export default function keyinfo() {
         </>
     );
 }
+
+export default KeyInfo;

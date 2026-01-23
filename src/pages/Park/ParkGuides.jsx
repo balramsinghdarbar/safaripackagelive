@@ -7,12 +7,71 @@ import ParkCard from '../../Components/Comman/park-safari-card';
 import Aside from '../../Components/Comman/aside';
 import TopRated from '../../Components/Comman/TopRated';
 import CommanBanner from "../../Components/Comman/CommanBanner";
-// import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../../api/api";
 export default function ParkGuides() {
 
-// const { speciesId } = useParams(); // 🔥 dynamic, URL clean
+    const [parks, setParks] = useState([]);
+    const [buffer, setBuffer] = useState([]);
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
-  
+   const fetchParks = async (pageNo) => {
+  try {
+    const res = await api.get("/public/park", {
+      params: { page: pageNo },
+    });
+
+    const data = res.data?.data || [];
+    console.log("PARK DATA:", data);
+
+    return data; 
+  } catch (err) {
+    console.error("API ERROR:", err);
+    return []; 
+  }
+};
+
+
+
+    useEffect(() => {
+        (async () => {
+            setLoading(true);
+            const data = await fetchParks(1);
+            setParks(data.slice(0, 6));
+            setBuffer(data.slice(6));
+            setLoading(false);
+        })();
+    }, []);
+
+    const handleLoadMore = async () => {
+        if (loading) return;
+        setLoading(true);
+
+        if (buffer.length >= 6) {
+            setParks(prev => [...prev, ...buffer.slice(0, 6)]);
+            setBuffer(prev => prev.slice(6));
+            setLoading(false);
+            return;
+        }
+
+        const remaining = buffer.length;
+        setParks(prev => [...prev, ...buffer]);
+        setBuffer([]);
+
+        const nextPage = page + 1;
+        setPage(nextPage);
+
+        const nextData = await fetchParks(nextPage);
+
+        setParks(prev => [
+            ...prev,
+            ...nextData.slice(0, 6 - remaining),
+        ]);
+
+        setBuffer(nextData.slice(6 - remaining));
+        setLoading(false);
+    };
     return (
         <>
             <div>
@@ -24,7 +83,7 @@ export default function ParkGuides() {
             {/* Join Shared Safari Section  */}
             <div className="container-lg container-inner-padding">
                 <Row className=" g-3 position-relative mb-5" style={{ minHeight: "100vh" }}>
-                    <Aside/>
+                    <Aside />
                     <Col xs={12} lg={9} className=" main-content-scroll">
                         <div className="filter-applied-container">
                             <div className="d-sm-flex align-items-center justify-content-between mb-2 flex-wrap">
@@ -33,12 +92,7 @@ export default function ParkGuides() {
                                 </div>
                                 <div className="d-lg-inline-block d-flex align-items-center justify-content-between mb-3">
                                     <div className="sort-by mb-sm-0">
-                                        {/* <select className="form-select custom-dropdown">
-                                    <option selected>Popular</option>
-                                    <option value="latest">Latest</option>
-                                    <option value="trending">Trending</option>
-                                    <option value="top">Top Rated</option>
-                                </select> */}
+
                                         <select className="form-select custom-dropdown" defaultValue="popular">
                                             <option value="popular">Popular</option>
                                             <option value="latest">Latest</option>
@@ -81,13 +135,17 @@ export default function ParkGuides() {
                         </div>
                         <section id="join-shared-safari" className="mb-md--5 mb--3 pb--1">
                             <Row className="card-container row align-items-center justify-content-start gx-3">
-                                <ParkCard />
-                               
+                                <ParkCard
+                                    parks={parks}
+                                    loading={loading}
+                                    onLoadMore={handleLoadMore}
+                                />
+
                             </Row>
                         </section>
 
                         {/* Top Rated Park   */}
-                        <TopRated/>
+                        <TopRated />
                     </Col>
                 </Row>
             </div>

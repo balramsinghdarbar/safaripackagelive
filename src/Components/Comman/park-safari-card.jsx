@@ -73,29 +73,31 @@ export default function Parksafari() {
         setBuffer(nextData.slice(6 - remaining));
         setLoading(false);
     };
+import { useNavigate } from "react-router-dom";
+export default function Parksafari({ parks, loading, onLoadMore }) {
 
+
+    console.log("Parks Card:",parks);
     const truncateByName = (name = "") => {
+            if (typeof name !== "string") return "";
 
-        if (typeof name !== "string") return "";
+            const length = name.length;
 
-        const limits = {
-            "Ranthambhore National Park (Ranthambore Tiger Reserve)": 19,
-            "Kaziranga National Park & Tiger Reserve": 19,
-            "Numquam Tenetur Anim": 15,
-            "Khangchendzonga National Park": 15,
-            "Bandhavgarh National Park (Bandhavgarh Tiger Reserve)": 20,
-            "Kanha National Park & Kanha Tiger Reserve": 20,
-            "Jim Corbett National Park": 20,
-            "Guru Ghasidas (Sanjay) National Park": 21,
+            let limit = 20; // default
+
+            if (length <= 22) {
+                return name; // no cut
+            } else if (length <= 30) {
+                limit = 19;
+            } else if (length <= 40) {
+                limit = 20;
+            } else {
+                limit = 21;
+            }
+
+            return name.slice(0, limit) + "...";
         };
-
-        const limit = limits[name] ?? 20;
-
-        return name.length > limit
-            ? name.slice(0, limit) + "..."
-            : name;
-    };
-
+   
     const shortBydescription = (description) => {
         if (!description) return "";
 
@@ -118,7 +120,7 @@ export default function Parksafari() {
             )
             .join(" ");
     };
-    const location = useLocation();
+  
     const navigate = useNavigate();
     let showButton = false;
     let navigateTo = "";
@@ -134,24 +136,22 @@ export default function Parksafari() {
     }
     // console.log("IMAGE:", parks.display_image);
 
+    
     const joinAndLimitThreeWords = (slug = "", state = "") => {
-        // slug → words
+
         const slugWords = slug
             .replace(/[-_]/g, " ")
             .split(" ")
             .filter(Boolean);
 
-        // state → sirf first word
         const stateWord = state
             ? state.trim().split(" ")[0]
             : "";
 
-        // dono join
         const allWords = stateWord
             ? [...slugWords, stateWord]
             : slugWords;
 
-        // Title Case
         const titleWords = allWords.map(
             w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
         );
@@ -167,10 +167,8 @@ export default function Parksafari() {
     }
     return (
         <>
-            {/* Join Shared Safari Section  */}
             {parks.map((item, index) => (
-                // console.log(item.park_id),
-                // console.log("wildlife", item.wildlife),
+                
                 <Col xl={4} sm={6} className=" join-safari-card-box mt-3 rounded-3" key={index}>
                     <Card className="rounded-3" >
                         {/* Card Image  */}
@@ -212,16 +210,7 @@ export default function Parksafari() {
                                     <div className="knowfor-list mt-1 mb-1">
                                         <h6 className="mb-0">Wildlife Found:</h6>
                                     </div>
-                                    {/* <ul
-                                        className="highlights highlights-grid knowfor-list ps-0 d-flex flex-wrap align-items-center mb-2">
-                                        {speciesName && (
-                                            <li className="card-list-text d-flex align-items-center gap-1 mb-md-0 mb-1">
-                                                <i className="fa fa-circle" aria-hidden="true"></i>
-                                                <p className="mb-0">{speciesName}</p>
-                                            </li>
-                                        )}
 
-                                    </ul> */}
                                     {/* Safari Type partition  */}
                                     <div className="knowfor-list mt-1 mb-1">
                                         <h6 className="mb-0">Safari Type:</h6>
@@ -231,34 +220,39 @@ export default function Parksafari() {
                                         {item.park_safari_types?.map((safari, card) => (
                                             <li key={card}
                                                 className="card-list-text d-flex align-items-center gap-1 mb-md-0 mb-1">
-                                               
+
                                                 <i className="fa-solid fa-check "></i>
                                                 <p className="mb-0" >{safari.type}</p>
                                             </li>
                                         ))}
-                                        {/* <li
-                                            className="card-list-text d-flex align-items-center gap-1 mb-md-0 mb-1">
-                                            <i className="fa-solid fa-check link-text"></i>
-                                            <p className="mb-0">Boat Safari</p>
-                                        </li>
-                                        <li
-                                            className="card-list-text d-flex align-items-center gap-1 mb-md-0 mb-1">
-                                            <i className="fa-solid fa-check link-text"></i>
-                                            <p className="mb-0">Canter Safari</p>
-                                        </li> */}
-
                                     </ul>
-
                                 </div>
                             </div>
                             <div className="price-container text-center pb-3 pt-sm-2">
-
-                                {showButton && (
-                                    <button onClick={() => navigate(navigateTo)}
+ 
+                              
+                                    {/* <button
+                                        onClick={() => navigate(`/park-detail/${item.slug}`)}
                                         className=" btn-sm btn-primary blue-btn-hover border-0 rounded-1 px-3">View
                                         Details
-                                    </button>
-                                )}
+                                    </button> */}
+                                    <button
+  onClick={() =>
+    navigate(`/park-detail/${item.slug}`, {
+      state: {
+        parkId: item.id,
+        safariTypes: item.park_safari_types,
+        bestTimes: item.park_best_times,
+        parkName: item.name,
+      },
+    })
+  }
+  className="btn-sm btn-primary blue-btn-hover border-0 rounded-1 px-3"
+>
+  View Details
+</button>
+
+                              
                             </div>
                         </Card.Body>
                     </Card>
@@ -266,21 +260,13 @@ export default function Parksafari() {
 
             ))}
 
-            <Col xs={12} className="text-center mt-4 pt-2">
-                {/* {hasMore && (
-                    <button
-                       onClick={handleLoadMore}
-                       disabled={loading}
-                        className="text-decoration-none btn-primary blue-btn-hover rounded-1 btn-sm border-0 px-3">
-                        {loading ? "Loading..." : "Load More"}
-                        
-                    </button>
-                )} */}
-
-                <button className="btn btn-primary mt-3" onClick={handleLoadMore}>
+            <Col xs={12} className="text-center mt-4 pt-2" >
+                <button className="btn btn-primary mt-3"  onClick={onLoadMore}
+          disabled={loading}>
                     Load More
                 </button>
             </Col>
+
         </>
     );
 

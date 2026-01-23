@@ -3,17 +3,22 @@ import bluevectorImg from '../../../../../../assets/images/blue-border-vector.pn
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../../../../../api/api";
+import { useOutletContext } from "react-router-dom";
+export default function Threats() {
 
 export default function Threats() {
 
   const { id, tabId, charId } = useParams();
+  const { tabId, charId } = useParams();
+   const { speciesId } = useOutletContext();
+    console.log("overview:",speciesId);
   // const [threats, setThreats] = useState(null);
   const [content, setContent] = useState(null);
   //  const tabs = outletContext?.tabs || [];
   useEffect(() => {
-    if (!id || !tabId) return;
+    if (!speciesId || !tabId) return;
 
-    api.get(`/public/species/tab/${id}`, {
+    api.get(`/public/species/tab/${speciesId}`, {
       params: {
         species_details_characterstic_id: tabId, // ✅ tab id
         species_characterstics: charId,
@@ -26,10 +31,12 @@ export default function Threats() {
       .catch(console.error);
 
   }, [id, tabId,charId]); // ✅ tabId dependency REQUIRED
+  }, [speciesId,tabId,charId]); 
 
   console.log("Threats data:", content);
   console.log("Short desc:", content?.short_description);
 
+  // if (!threats) return <p>Loading threats...</p>;
   return (
     <>
       <div>

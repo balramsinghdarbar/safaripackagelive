@@ -97,6 +97,95 @@ app.get("/public/shared-safari", async (req, res) => {
 
 });
 
+app.get("/public/park", async (req, res) => {
+  try {
+    const { species_id, page } = req.query;
+
+    const response = await axios.get(
+      `${process.env.API_BASE_URL}/public/park`,
+      { params: { species_id, page } }
+    );
+
+    const parks = response.data?.data || [];
+
+    const fixedData = parks.map((park) => {
+      let wildlife = [];
+
+      if (typeof park.famous_for === "string" && park.famous_for.trim()) {
+        // split by " And " OR comma OR period
+        wildlife = park.famous_for
+          .split(/\s+And\s+|,\s*|\.\s*/)
+          .filter(Boolean)
+          .map((name, index) => ({
+            id: index + 1,
+            name: name.trim(),
+          }));
+      }
+
+      return {
+        ...park,
+        wildlife, // ✅ ALWAYS ARRAY
+      };
+    });
+
+    res.json({
+      ...response.data,
+      data: fixedData,
+    });
+
+  } catch (error) {
+    console.error("PARK API ERROR:", error.message);
+    res.status(500).json({ message: "Failed to fetch park data" });
+  }
+});
+app.get("/public/park/details/:slug", async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    console.log("FORWARDING SLUG:", slug);
+  
+
+    const response = await axios.get(
+      `${process.env.API_BASE_URL}/public/park/details/${slug}`,
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch park details",
+    });
+  }
+});
+app.get("/public/park/tabs/details", async (req, res) => {
+  try {
+    const { park_id, park_tabs_id } = req.query;
+
+    console.log("FORWARDING park_id:", park_id);
+    console.log("FORWARDING park_tabs_id:", park_tabs_id);
+
+    const response = await axios.get(
+      `${process.env.API_BASE_URL}/public/park/tabs/details`,
+      {
+        params: {
+          park_id,
+          park_tabs_id,
+        },
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch park tab details",
+    });
+  }
+});
+
 app.get("/public/safari-package", async (req, res) => {
   try {
     const { state_id, park_id, species_id } = req.query;
@@ -117,6 +206,11 @@ app.get("/public/safari-package", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch safari packages" });
   }
 });
+
+
+
+
+
 
 
 
