@@ -984,6 +984,7 @@ ul#parkTab li {
     object-fit: cover;
     padding: 10px;
     border-radius: 20px;
+    width: 100%;
 }
 
 .modes-img {
@@ -1748,10 +1749,66 @@ select.form-control {
 
 }
 
-/* .page-btn.disabled, .page-btn:disabled {
-    color: #fff !important;
-    pointer-events: none !important;
-    background-color: #0d6efd !important;
-    border-color: #0d6efd !important;
-    opacity: 0.65;
-} */
+.join-safari-card-box .card-body-inner {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    max-height: 320px;
+    padding: .75rem 1rem;
+}
+
+/************** park sub tabs  ************/
+
+.about-section {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.about-section.right .img-box {
+    float: right;
+    width: 320px;
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+.about-section.left .img-box {
+    float: left;
+    width: 320px;
+    margin-right: 25px;
+    margin-bottom: 15px;
+}
+.about-section .img-box img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+.about-section .text-box {
+    display: block;
+}
+.about-section:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.text-box{
+    text-align: left !important;
+}
+
+.wildlife-text{
+    color:#f27a3b;
+}
+
+.best-time-li {
+  display: block !important;
+  overflow: visible !important;
+}
+
+.best-time-text {
+  display: block !important;
+  color: #000 !important;
+  white-space: normal !important;
+  line-height: 1.5 !important;
+  margin-top: 4px;
+}
+
+
+
+

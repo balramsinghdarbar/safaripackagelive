@@ -33,7 +33,7 @@ export default function Parkaside() {
                                 {/* Accommodation  */}
                                 <div className="mb-3">
                                     <label className="form-label mb-1">Accommodation</label>
-                                    <select className="form-select" defaultValue={Budget} value={brand} onChange={(e) => setBrand(e.target.value)}>
+                                    <select className="form-select"  value={brand} onChange={(e) => setBrand(e.target.value)}>
                                         {/* <option >Select...</option> */}
                                         <option value="Budget">Budget</option>
                                         <option value="Mid-range">Mid-range</option>

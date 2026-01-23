@@ -1,18 +1,19 @@
-import { NavLink, useParams, Outlet, useOutletContext } from "react-router-dom";
+import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { Row, Col, Nav } from "react-bootstrap";
 import Sidebar from "../Overview/sidebar";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 export default function OverviewLayout() {
-  const { id } = useParams();
-  const tabRefs = useRef([]);;
-
+  const tabRefs = useRef([]);
   const outletContext = useOutletContext();
-  const tabs = outletContext?.tabs || []
+  const tabs = outletContext?.tabs || [];
+  // const slug = outletContext?.slug;
+  const speciesId  = outletContext?.speciesId;
+
+
+console.log("speciesId:", speciesId);
   const tabLinks = [];
   for (let i = 0; i < tabs.length; i++) {
     const tab = tabs[i];
-
-    // console.log(tabs[i]);
     tabLinks.push(
       <Nav.Item key={tab.species_details_characterstic_id}
         ref={(el) => (tabRefs.current[i] = el)}>
@@ -29,7 +30,7 @@ export default function OverviewLayout() {
           }}
           as={NavLink}
           to=
-          {`/species/${id}/overview/${tab.species_details_characterstic_id}/${tab.species_characterstics}`}
+          {`/species/${speciesId}/overview/${tab.species_details_characterstic_id}/${tab.species_characterstics}`}
         >
           {tab.title}
         </Nav.Link>
@@ -44,7 +45,6 @@ export default function OverviewLayout() {
         <Sidebar />
 
         <Col xs={12} lg={8} xl={9} className="main-content-scroll">
-          {/* Dynamic overview sub-tabs */}
           <div className="bg-white packagetab-navbar species-detail-tabs rounded-3 px-4 py-1 shadow-sm mb-4">
             <div className="overflow-auto">
               <Nav variant="pills" className="main-tabs flex-nowrap gap-2">
@@ -52,8 +52,6 @@ export default function OverviewLayout() {
               </Nav>
             </div>
           </div>
-
-          {/* Sub-tab content */}
           <Outlet context={outletContext} />
         </Col>
       </Row>
