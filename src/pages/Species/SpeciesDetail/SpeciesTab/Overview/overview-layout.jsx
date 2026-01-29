@@ -6,7 +6,6 @@ export default function OverviewLayout() {
   const tabRefs = useRef([]);
   const outletContext = useOutletContext();
   const tabs = outletContext?.tabs || [];
-  // const slug = outletContext?.slug;
   const speciesId  = outletContext?.speciesId;
 
 
