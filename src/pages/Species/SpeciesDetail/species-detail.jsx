@@ -1,33 +1,34 @@
-// import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Speciessidetabs from "./SpeciesTab/species-tabs";
 import Header from "../../../Components/Layout/Header";
 import Footer from "../../../Components/Layout/Footer";
 import Parkbanner from "../../../Components/Comman/park-banner";
 import { useParams } from "react-router-dom";
-// import api from '../../../api/api';
+import api from '../../../api/api';
 export default function SpeciesDetail() {
- const { speciesId } = useParams();
+  const { speciesId } = useParams();
 
-// const [speciesId, setSpeciesId] = useState(null);
+  const [specieId, setSpeciesId] = useState([]);
+  useEffect(() => {
+    api.get("/public/species")
+      .then(res => {
 
-// useEffect(() => {
-//   api.get("/public/species").then(res => {
-//     const match = res.data.data.find(
-//       item => item.slug === slug
-//     );
-//     setSpeciesId(match?.species_id);
-//   });
-// }, [slug]);
+        const data = res.data.data;
+        console.log("Data:", data);
+        setSpeciesId(data);
+      });
+  }, []);
+const speciesIds = specieId.map(item => item.species_id);
+console.log(speciesIds);
+  console.log(speciesId);
+  
+    return (
+      <>
+        <Header />
+        <Parkbanner />
 
-console.log(speciesId); 
-
-  return (
-    <>
-      <Header />
-      <Parkbanner />
-
-      <Speciessidetabs  speciesId={speciesId} />
-      <Footer />
-    </>
-  );
-}
+        <Speciessidetabs speciesId={speciesId} />
+        <Footer />
+      </>
+    );
+  }

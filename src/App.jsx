@@ -87,7 +87,7 @@ function App() {
             </Route>
            
             <Route path="/species" element={<Species />} />
-            <Route path="/species/:speciesId" element={<SpeciesDetail />}>
+            <Route path="species-detail/:speciesId" element={<SpeciesDetail />}>
               <Route index element={<Navigate to="overview/90/1" replace />} />
                <Route path="overview/:tabId/:charId" element={<OverviewLayout />}>
                 {/* <Route path="overview/:tabId/:charId" element={<TabRouter />} /> */}

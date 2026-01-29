@@ -1,16 +1,14 @@
 import React from 'react';
 import { useState } from "react";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 export default function Parkaside() {
     const [brand, setBrand] = useState("");
     
     return (
         <>
-
             {/* Sidebar Filter  */}
             <aside className="col-12 col-lg-4 col-xl-3">
-
                 <div className="filter-sidebar-wrapper filter-sidebar-wrapper-park border-0 mb-xl-0 mb-3">
                     <div className="quote-form">
                         {/* Safari Quote Request Box */}
@@ -34,7 +32,7 @@ export default function Parkaside() {
                                 <div className="mb-3">
                                     <label className="form-label mb-1">Accommodation</label>
                                     <select className="form-select"  value={brand} onChange={(e) => setBrand(e.target.value)}>
-                                        {/* <option >Select...</option> */}
+                                       
                                         <option value="Budget">Budget</option>
                                         <option value="Mid-range">Mid-range</option>
                                         <option value="luxury">Luxury</option>

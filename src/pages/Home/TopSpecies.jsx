@@ -1,18 +1,58 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Row, Col } from 'react-bootstrap';
 import VectorImg from '../../assets/images/Vector.png';
-import speciesImg1 from '../../assets/images/animal-images/species-1.png';
-import speciesImg2 from '../../assets/images/animal-images/species-2.png';
-import speciesImg3 from '../../assets/images/animal-images/species-3.png';
-import speciesImg4 from '../../assets/images/animal-images/species-4.png';
-import speciesImg5 from '../../assets/images/animal-images/species-5.png';
-import speciesImg6 from '../../assets/images/animal-images/species-6.png';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import Placeholder from 'react-bootstrap/Placeholder';
+import api from "../../api/api";
 export default function TopSpecies() {
-   
-     const navigate = useNavigate();
-           const goToSpeciesdetail = () => {
-               navigate("/species-detail");
-           }
+    const [species, setSpecies] = useState([]);
+    useEffect(() => {
+        api.get("/public/species")
+            .then(res => {
+                console.log("API LOADED ON PAGE LOAD");
+                const response = res.data.data;
+                console.log("response:", response);
+                setSpecies(response);
+            })
+            .catch(err => console.error(err));
+    }, []);
+
+    console.log("species:", species);
+    const { speciesId } = useParams;
+    console.log(speciesId);
+    const navigate = useNavigate();
+    // const specie_id = 23;
+    // const goToSpeciesdetail = () => {
+
+    //     navigate(`/species-detail/${specie_id}`);
+    // }
+    // const topSixSpecies = species.slice(0, 6);
+    const renderSpecies = () => {
+        return species.slice(0, 6).map((item, index) => (
+            <Col sm={6} md={4} key={item.species_id || index}>
+                <div className="rounded-4 overflow-hidden position-relative mb-3 text-center species-medium">
+
+                    <img
+                        src={
+                            item.display_image
+                                ? `${import.meta.env.VITE_API_BASE_URLs}${item.display_image}`
+                                : ""
+                        }
+                        alt={item.name}
+                        onClick={() => navigate(`/species-detail/${item.species_id}`)}
+                        className="img-fluid"
+                        style={{ cursor: "pointer" }}
+                    />
+
+                    <div className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
+                        {item.name}
+                    </div>
+
+                </div>
+            </Col>
+        ));
+    };
+
 
     return (
         <>
@@ -22,7 +62,7 @@ export default function TopSpecies() {
                     <div className="heading-text d-flex align-items-center justify-content-between flex-wrap mb-xl-4 mb-3">
                         <div className="">
                             <h2 className="mb-0 text-blue">Top Species</h2>
-                            <img src={VectorImg} alt="Vector-Border" className="vector-border-bottom"  />
+                            <img src={VectorImg} alt="Vector-Border" className="vector-border-bottom" />
                         </div>
                         <div className="viewall-link">
                             <a href="/species"
@@ -31,77 +71,7 @@ export default function TopSpecies() {
                     </div>
                     <div className="">
                         <Row className=" g--3">
-                             <Col sm={6} md={4} className="mt-0">
-                                <div className="rounded-4 overflow-hidden position-relative mb-3 text-center species-medium">
-                                    <a href="/species-detail">
-                                        <img src={speciesImg1} className="img-fluid rounded-4" alt="Species-4" onClick={goToSpeciesdetail} />
-                                        <div
-                                            className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
-                                            Greater coucal
-                                        </div>
-                                    </a>
-                                </div>
-                            </Col>
-                            
-                            <Col sm={6} md={4} className=" mt-0">
-
-                                <div className="rounded-4 overflow-hidden position-relative mb-3 species-medium">
-                                    <a href="/species-detail">
-                                        <img src={speciesImg5} className="img-fluid rounded-4" alt="Species-5" onClick={goToSpeciesdetail} />
-                                        <div
-                                            className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
-                                            Bengal Tiger</div>
-                                    </a>
-                                </div>
-                            </Col>
-                             
-                            <Col sm={6} md={4} className=" mt-0">
-                                <div
-                                    className="rounded-4 overflow-hidden position-relative mb-3 text-center species-medium">
-                                    <a href="/species-detail">
-                                        <img src={speciesImg6} className="img-fluid rounded-4" alt="Species-6" onClick={goToSpeciesdetail} />
-                                        <div
-                                            className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
-                                            Sloth Bear</div>
-                                    </a>
-                                </div>
-                            </Col>
-                            
-                            <Col sm={6} md={4} className="mt-0">
-                                <div className="rounded-4 overflow-hidden position-relative mb-3 text-center species-medium">
-                                    <a href="/species-detail">
-                                        <img src={speciesImg4} className="img-fluid rounded-4" alt="Species-4" onClick={goToSpeciesdetail} />
-                                        <div
-                                            className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
-                                            Greater coucal
-                                        </div>
-                                    </a>
-                                </div>
-                            </Col>
-                            {/* Column 3  */}
-                            <Col sm={6} md={4} className=" mt-0">
-
-                                <div className="rounded-4 overflow-hidden position-relative mb-3 species-medium">
-                                    <a href="/species-detail">
-                                        <img src={speciesImg5} className="img-fluid rounded-4" alt="Species-5" onClick={goToSpeciesdetail} />
-                                        <div
-                                            className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
-                                            Bengal Tiger</div>
-                                    </a>
-                                </div>
-                            </Col>
-                             
-                            <Col sm={6} md={4} className=" mt-0">
-                                <div
-                                    className="rounded-4 overflow-hidden position-relative mb-3 text-center species-medium">
-                                    <a href="/species-detail">
-                                        <img src={speciesImg6} className="img-fluid rounded-4" alt="Species-6" />
-                                        <div
-                                            className="position-absolute bottom-0 start-0 end-0 p-2 bg-black bg-opacity-50 text-white text-center rounded-bottom-4">
-                                            Sloth Bear</div>
-                                    </a>
-                                </div>
-                            </Col>
+                            {renderSpecies()}
                         </Row>
                     </div>
                 </div>

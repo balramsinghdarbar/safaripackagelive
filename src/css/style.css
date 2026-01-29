@@ -20,6 +20,7 @@ html {
     font: var(--body-text);
     color: #1D4358 !important;
     text-decoration: none !important;
+    cursor: pointer;
 }
 
 .nav-link.active {

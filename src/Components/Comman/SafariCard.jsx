@@ -2,13 +2,11 @@ import { useEffect} from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
-import { useLocation, useNavigate} from "react-router-dom";
-// import api from '../../api/api';
+import { Row, Col } from 'react-bootstrap';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 const SafariCard = ({ item, pkg }) => {
-    // console.log("SafariCard item:", item);
     console.log("SafariCard pkg:", pkg);
-    // console.log("PARK WILDLIFE:", park?.wildlife);
 
     useEffect(() => {
         console.log("SafariCard pkg:", pkg);
@@ -16,20 +14,11 @@ const SafariCard = ({ item, pkg }) => {
             console.log("Wildlife abhi nahi aaya");
             return;
         }
-
-        // pkg.park.wildlife.forEach((w, index) => {
-        //     console.log(`Species ${index}:`, w.species?.name);
-        // });
-        //  pkg.park.wildlife.forEach((w, index) => {
-        //     console.log(`Species ${index}:`, w.species?.name);
-        // });
-
     }, [pkg]);
 
     const navigate = useNavigate();
     const location = useLocation();
 
- 
     const imageUrl =
         pkg?.display_image
             ? pkg.display_image
@@ -39,7 +28,6 @@ const SafariCard = ({ item, pkg }) => {
                 ? item.display_image
                 : `${import.meta.env.VITE_API_BASE_URLs}/assets/images/GPT-1.png`;
 
-    // console.log("Image URL:", imageUrl);
     const formatSlug = (slug = "") =>
         slug
             .replace(/-/g, " ")
@@ -55,8 +43,6 @@ const SafariCard = ({ item, pkg }) => {
             ? formatSlug(item.slug)
             : "";
 
-
-    // console.log("Title:", title);
     const shortTitle =
         pkg?.park?.name
             ? pkg.park.name.length > 30
@@ -67,27 +53,54 @@ const SafariCard = ({ item, pkg }) => {
                     ? item.park.name.slice(0, 30) + "..."
                     : item.park.name
                 : "";
-
-
-    // console.log("Short Title:", shortTitle);
-    // console.log("Location Pathname:", location.pathname);
-    // console.log("Park:", park);
-    // console.log("park?.name:", park?.park?.name);
-
     const priceRange =
     pkg?.min_price_pp && pkg?.max_price_pp
         ? `₹${pkg.min_price_pp} - ₹${pkg.max_price_pp}`
         : item?.min_price_pp && item?.max_price_pp
             ? `₹${item.min_price_pp} - ₹${item.max_price_pp}`
             : "";
-    // console.log("Price Range:", priceRange);
-    // const package_image = location.pathname === "/safari-packages";
-    // const sharedsafari_image = location.pathname === "";
-    // if (!item) return null;
-    // if (!park) return null;
+            const { slug: parkSlug ,id:speciesId } = useParams(); 
+
+  const isParkPackagePage =
+    location.pathname.startsWith(`/park-detail/${parkSlug}`) &&
+    location.pathname.endsWith("/park-package");
+
+     const isParkSafariPage =
+    location.pathname.startsWith(`/park-detail/${parkSlug}`) &&
+    location.pathname.endsWith("/park-safari");
+     const isSpeciesSafariPage =
+    location.pathname.startsWith(`/species-detail/${speciesId}`) &&
+    location.pathname.endsWith("/species-safaris");
+    const isSpeciesPackagePage =
+    location.pathname.startsWith(`/species-detail/${speciesId}`) &&
+    location.pathname.endsWith("/packages");
+    // const isHomePage =
+    // location.pathname.startsWith(`/`) &&
+    // location.pathname.endsWith("/joinSharedSafari");
 
     let buttonText = "";
     let navigateTo = "";
+ if (isParkPackagePage ) {
+    buttonText = "View Detail";
+    navigateTo = "/PackagesDetail";
+  }
+    if (isSpeciesPackagePage) {
+    buttonText = "View Detail";
+    navigateTo = "/PackagesDetail";
+  }
+   if (isSpeciesSafariPage ) {
+    buttonText = "View Detail";
+    navigateTo = "/SafariDetail";
+  }
+//   if(isHomePage){
+//     buttonText = "View Detail";
+//     navigateTo = "/SafariDetail";
+//   }
+  if (isParkSafariPage) {
+    buttonText = "View Detail";
+    navigateTo = "/SafariDetail";
+  }
+  
 
     if (location.pathname === "/join-shared-safari") {
         buttonText = "View Detail";
@@ -97,7 +110,6 @@ const SafariCard = ({ item, pkg }) => {
         buttonText = "View Detail";
         navigateTo = "/PackagesDetail";
     }
-
     return (
         <>
             <Col xl={4} sm={6} className="join-safari-card-box mt-3 rounded-3">

@@ -6,9 +6,11 @@ export default function OverviewLayout() {
   const tabRefs = useRef([]);
   const outletContext = useOutletContext();
   const tabs = outletContext?.tabs || [];
-  // const slug = outletContext?.slug;
   const speciesId  = outletContext?.speciesId;
+// const { tabs = [], speciesIds = [] } = useOutletContext() || {};
 
+//   console.log("tabs:", tabs);
+//   console.log("speciesIds:", speciesIds);
 
 console.log("speciesId:", speciesId);
   const tabLinks = [];
@@ -30,7 +32,7 @@ console.log("speciesId:", speciesId);
           }}
           as={NavLink}
           to=
-          {`/species/${speciesId}/overview/${tab.species_details_characterstic_id}/${tab.species_characterstics}`}
+          {`/species-detail/${speciesId}/overview/${tab.species_details_characterstic_id}/${tab.species_characterstics}`}
         >
           {tab.title}
         </Nav.Link>
