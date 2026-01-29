@@ -1,19 +1,19 @@
 import bluevectorImg from '../../../../../../assets/images/blue-border-vector.png';
-// import detailImg2 from '../../../../../../assets/images/park-detail/detail-2.jpg';
-// import speciesImg2 from '../../../../../../assets/images/animal-images/species-2.png';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../../../../../api/api";
+import { useOutletContext } from "react-router-dom";
+export default function Lesserknownfacts() {
 
-export default function lesserknownfacts() {
-
-  const { id, tabId, charId } = useParams();
+  const { tabId, charId } = useParams();
+  const { speciesId } = useOutletContext();
+    console.log("Lesserknownfacts:",speciesId);
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (!speciesId) return;
 
-    api.get(`/public/species/tab/${id}`, {
+    api.get(`/public/species/tab/${speciesId}`, {
       params: {
         species_details_characterstic_id: tabId,
         species_characterstics: charId,              // 🔥 REQUIRED
@@ -28,7 +28,7 @@ export default function lesserknownfacts() {
       })
       .catch(console.error);
 
-  }, [id]);
+  }, [speciesId,tabId,charId]);
 
   if (!content) return <p>Loading overview...</p>;
 

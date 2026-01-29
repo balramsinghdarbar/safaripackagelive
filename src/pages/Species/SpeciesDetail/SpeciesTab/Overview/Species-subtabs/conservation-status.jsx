@@ -2,18 +2,21 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../../../../../api/api";
 import bluevectorImg from '../../../../../../assets/images/blue-border-vector.png';
-export default function conservationstatus() {
+import { useOutletContext } from "react-router-dom";
+export default function Conservationstatus() {
 
-  const { id, tabId, charId } = useParams();
+  const { tabId, charId } = useParams();
+   const { speciesId } = useOutletContext();
+    console.log("Lesserknownfacts:",speciesId);
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    if (!id || !tabId || !charId) return;
+    if (!speciesId || !tabId || !charId) return;
 
-    api.get(`/public/species/tab/${id}`, {
+    api.get(`/public/species/tab/${speciesId}`, {
       params: {
-        species_details_characterstic_id: tabId,   // 🔥 REQUIRED ()
-        species_characterstics: charId,              // 🔥 REQUIRED
+        species_details_characterstic_id: tabId,   
+        species_characterstics: charId,              
       },
     })
       .then((res) => {
@@ -25,7 +28,7 @@ export default function conservationstatus() {
       })
       .catch(console.error);
 
-  }, [id]);
+  }, [speciesId,tabId,charId]);
 
   if (!content) return <p>Loading overview...</p>;
 
