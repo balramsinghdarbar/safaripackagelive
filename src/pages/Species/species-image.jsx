@@ -21,10 +21,6 @@ const Speciesimage = () => {
             .catch(err => console.error(err));
     }, []);
 
-    // const goToSpeciesDetail = () => {
-    //     const species_id = 23;
-    //     navigate(`/species-detail/${species_id}`);
-    // };
    const renderSpecies = () => {
   return data
     .slice(0, visibleCount)
