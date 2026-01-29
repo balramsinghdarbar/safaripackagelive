@@ -8,10 +8,8 @@ const navLinkStyles = ({ isActive }) => ({
     color: isActive ? '#f27a3b' : ' #1D4358',
 });
 export default function Speciestabs({ speciesId }) {
-    // console.log("slug in tabs:", slug);
      console.log("speciesId in tabs:", speciesId);
     const [tabs, setTabs] = useState([]);
-    
     useEffect(() => {
         api.get(`/public/species/bengal-tiger`)
             .then(res => {
@@ -30,7 +28,7 @@ export default function Speciestabs({ speciesId }) {
                     <div className="overflow-auto">
                         <Nav variant="pills" className="main-tabs flex-nowrap  gap-2" >
 
-                            <NavLink to={`/species/${speciesId}/overview`}
+                            <NavLink to={`/species-detail/${speciesId}/overview`}
                                 className={({ isActive }) =>
                                     isActive
                                         ? "nav-link active"
@@ -38,11 +36,11 @@ export default function Speciestabs({ speciesId }) {
                                 }>
                                 Overview
                             </NavLink>
-                            <NavLink to={`/species/${speciesId}/packages`}
+                            <NavLink to={`/species-detail/${speciesId}/packages`}
                                 className="fw-semibold rounded-pill nav-link" style={navLinkStyles}>
                                 Packages
                             </NavLink>
-                            <NavLink to={`/species/${speciesId}/species-safaris`}
+                            <NavLink to={`/species-detail/${speciesId}/species-safaris`}
                                 className="fw-semibold rounded-pill nav-link">
                                 Shared Safaris
                             </NavLink>

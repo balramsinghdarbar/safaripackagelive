@@ -2,9 +2,10 @@ import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Col } from 'react-bootstrap';
 import VectorImg from '../../assets/images/Vector.png';
-import SafariCard from '../../Components/Comman/SafariCard';
+import SharedSafari from '../SharedSafari';
 import { useNavigate } from "react-router-dom";
-export default function joinSharedSafari() {
+
+export default function JoinSharedSafari() {
    
     const navigate = useNavigate();
            const goToSharedsafari = () => {
@@ -29,17 +30,9 @@ export default function joinSharedSafari() {
                     </div>
                     <div className="card-container row align-items-center justify-content-between gx-3">
 
-                        {/* <Col lg={4} sm={6} className="join-safari-card-box mb-3 px-2 rounded-3"> */}
-                            <SafariCard />
-                        {/* </Col> */}
-                        {/* <Col lg={4} sm={6} className="join-safari-card-box mb-3 px-2 rounded-3">
-                            <SafariCard />
-
-                        </Col>
-                        <Col lg={4} sm={6} className="join-safari-card-box mb-3 px-2 rounded-3">
-                            <SafariCard />
-
-                        </Col> */}
+                        
+                            <SharedSafari limit={3} />
+                        
 
                     </div>
                 </div>

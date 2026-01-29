@@ -4,12 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Slider = ReactSlick && ReactSlick.default ? ReactSlick.default : ReactSlick;
-import '../../css/style.css';
-import '../../css/responsive.css';
-import '../../css/full-forms.css';
-import '../../css/all-form.css';
-import '../../css/listingpages.css';
-import '../../css/package-listing-detail.css';
 import animalTigerImg from '../../assets/images/animal-images/tiger.png';
 import bluebordervectorImg from '../../assets/images/blue-border-vector.png';
 

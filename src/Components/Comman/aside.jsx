@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-// import { useLocation } from "react-router-dom";
 import Accordion from 'react-bootstrap/Accordion';
 import api from '../../api/api'
 import Select from 'react-select';
@@ -16,18 +15,12 @@ const Aside = ({
     onParkChange,
     onSpeciesChange,
 }) => {
-    // const [selectedOption, setSelectedOption] = useState(null);
+
     const [list, setList] = useState([]);
     const [tabs, setTabs] = useState([]);
     const [themes, setThemes] = useState([]);
     const [budge, setBudget] = useState([]);
     const [category, setCategory] = useState([]);
-    // const [tour, setTour] = useState([]);
-    // const [selectedOption, setSelectedOption] = useState([]);
-    // const [options, setOptions] = useState([]);
-    // const [park, setPark] = useState(null);
-    // const [parkoption, setParkoption] = useState([]);
-    // const [species, setSpecies] = useState([]);
 
     const location = useLocation();
     const hideStayTheme = location.pathname === "/park-guides";
@@ -38,9 +31,6 @@ const Aside = ({
 
     const [minPrice, setMinPrice] = useState(MIN);
     const [maxPrice, setMaxPrice] = useState(MAX);
-
-
-    // const [state, setState] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,7 +63,6 @@ const Aside = ({
         const fetchDatabudget = async () => {
             try {
                 const res = await api.get("/public/get-safari-budget");
-                // console.log(res.data.data);
                 setBudget(res.data?.data || []);
             } catch (err) {
                 console.error("API ERROR:", err);
@@ -83,7 +72,6 @@ const Aside = ({
         const fetchDatacategory = async () => {
             try {
                 const res = await api.get("/public/stay-category");
-                // console.log(res.data.data);
                 setCategory(res.data?.data || []);
             } catch (err) {
                 console.error("API ERROR:", err);
@@ -97,28 +85,11 @@ const Aside = ({
         fetchDatabudget();
         fetchDatacategory();
     }, []);
-
-    const handleChange = (option) => {
-        setSelectedOption(option);
-        console.log("Selected:", option);
-    };
-    // const handlespeciesChange = (specie) => {
-    //     setAnimal(specie);
-    //     console.log("Selected:", specie);
-    // };
-    // const handleparkChange = (park) => {
-    //     setPark(park);
-    //     console.log("Selected:", park);
-    // };
-
-
     return (
         <>
-            {/* Sidebar Filter  */}
             <aside className="col-12 col-lg-3 mt-lg-3 mt-0">
                 <div className="filter-sidebar-wrapper rounded-3 border shadow-sm">
                     <div className="filter-sidebar-content rounded-3 p-3">
-                        {/* Close Button for Mobile */}
                         <div className="d-flex justify-content-end d-lg-none">
                             <button className="btn-close" id="closeFilter" aria-label="Close"></button>
                         </div>
@@ -130,37 +101,12 @@ const Aside = ({
                                 className="select-state"
                                 value={selectedState}
                                 onChange={onStateChange}
-                                 closeMenuOnSelect={false}
+                                closeMenuOnSelect={false}
                                 options={stateOptions}
                                 blurInputOnSelect={false}
-                                // menuIsOpen={true}
                                 placeholder="Select State"
                             />
-                            {/* <Select
-                                 className="select-state"
-                                value={selectedState}
-                                onChange={onStateChange}
-                                 closeMenuOnSelect={false}
-                                options={stateOptions}
-                                menuIsOpen={true}
-                                placeholder="Select State"
-                            /> */}
-                            {/* <Select
-                                placeholder="Select State"
-                                options={stateOptions.map(s => ({
-                                    value: s.id,
-                                    label: s.name
-                                }))}
-                                value={
-                                    stateOptions
-                                        .map(s => ({ value: s.id, label: s.name }))
-                                        .find(opt => opt.value === selectedState) || null
-                                }
-                                onChange={(option) => onStateChange(option?.value || null)}
-                            /> */}
                         </div>
-
-                        {/* National Parks Selection  */}
                         <div className="filter-group py-3 border-bottom mb-0">
                             <label htmlFor="speciesSelectpark" className="form-label">Select Wild Life Sanctuaries</label>
                             <Select
@@ -172,24 +118,9 @@ const Aside = ({
                                 blurInputOnSelect={false}
                                 placeholder="Select an option"
                             />
-                            {/* <Select
-                                placeholder="Select Park"
-                                options={parkOptions.map(p => ({
-                                    value: p.id,
-                                    label: p.name
-                                }))}
-                                value={
-                                    parkOptions
-                                        .map(p => ({ value: p.id, label: p.name }))
-                                        .find(opt => opt.value === selectedPark) || null
-                                }
-                                onChange={(option) => onParkChange(option?.value || null)}
-                            /> */}
                         </div>
-                        {/* Accordion Filters defaultActiveKey="0" */}
                         <Accordion id="filterAccordion" >
 
-                            {/* Budget */}
                             {!hideStayTheme && (
                                 <Accordion.Item eventKey="0" className='bg-transparent border-0 border-bottom rounded-0'>
                                     <Accordion.Header>
@@ -210,7 +141,6 @@ const Aside = ({
                                     </Accordion.Body>
                                 </Accordion.Item>
                             )}
-                            {/* Included  */}
                             {!hideStayTheme && (
                                 <Accordion.Item eventKey="1" className='bg-transparent border-0 border-bottom rounded-0'>
                                     <Accordion.Header>
@@ -253,27 +183,12 @@ const Aside = ({
                                 <Select
                                     className="select-state"
                                     value={selectedSpecies}
-                                    options={ speciesOptions}
+                                    options={speciesOptions}
                                     onChange={onSpeciesChange}
                                     closeMenuOnSelect={true}
                                     blurInputOnSelect={false}
-                                    // menuIsOpen={true}
                                     placeholder="Select State"
                                 />
-                                {/* <Select
-                                    placeholder="Select Species"
-                                    options={speciesOptions.map(sp => ({
-                                        value: sp.id,
-                                        label: sp.name
-                                    }))}
-                                    value={
-                                        speciesOptions
-                                            .map(sp => ({ value: sp.id, label: sp.name }))
-                                            .find(opt => opt.value === selectedSpecies) || null
-                                    }
-                                    onChange={(option) => onSpeciesChange(option?.value || null)}
-                                /> */}
-
 
                             </div>
                             {/* Best Time */}
@@ -294,9 +209,7 @@ const Aside = ({
                                     </Accordion.Body>
                                 </Accordion.Item>
                             )}
-                            {/* Stay Category  */}
                             {!hideStayTheme && (
-
                                 <Accordion.Item eventKey="4" className='bg-transparent border-0 border-bottom rounded-0'>
                                     <Accordion.Header>
                                         Stay Category

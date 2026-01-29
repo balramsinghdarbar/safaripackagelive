@@ -1,34 +1,82 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import Select from 'react-select'
-// import $ from "jquery";
-// import "select2/dist/css/select2.min.css";
-// import "select2";
-
-const options = [
-     {value:"",label:"All/Any"},
-    { value: 'achanakamr', label: 'Achanakmar Tiger Reserve' },
-    { value: 'amrabad', label: 'Amrabad Tiger Reserve' },
-    { value: 'anamalai', label: 'Anamalai Tiger Reserve' },
-    { value: 'bandhavgarh', label: 'Bandhavgarh Tiger Reserve' },
-    { value: 'bandipur', label: 'Bandipur Tiger Reserve' }
-]
-
-const options1 = [
-     {value:"",label:"All/Any"},
-    { value: 'madhya', label: 'Madhya Pradesh' },
-    { value: 'maharashtra', label: 'Maharashtra' },
-    { value: 'karnataka', label: 'Karnataka' },
-    { value: 'gujarat', label: 'Gujarat' }
-]
-const options2 = [
-     {value:"",label:"All/Any"},
-    { value: "tiger", label: 'Tiger' },
-    { value: "leopard", label: 'Leopard' },
-    { value: "elephant", label: 'Elephant' },
-    { value: "bear", label: 'Bear' }
-]
+import api from '../../api/api';
 const Banner = () => {
 
+    const [states, setStates] = useState([]);
+    const [options, setOptions] = useState([]);
+    const [selectedState, setSelectedState] = useState(null);
+    const [parks, setParks] = useState([]);
+    const [parkoptions, setParkOptions] = useState([]);
+    const [selectedParks, setSelectedParks] = useState(null);
+    const [species, setSpecies] = useState([]);
+    const [speciesoptions, setSpeciesOptions] = useState([]);
+    const [selectedSpecies, setSelectedSpecies] = useState(null);
+
+    useEffect(() => {
+        const fetchstateData = async () => {
+            try {
+                const res = await api.get("/public/state");
+                const data = res.data?.data || [];
+                setStates(data);
+
+                const stateOptions = data.map(item => ({
+                    value: item.state_id,
+                    label: item.name,
+                }));
+                setOptions(stateOptions);
+
+            } catch (err) {
+                console.error("API ERROR:", err);
+                setStates([]);
+                setOptions([]);
+            }
+        };
+        const fetchparksData = async () => {
+            try {
+                const res = await api.get("/public/get-national-parks");
+                const data = res.data?.data || [];
+                setParks(data);
+
+                const parkOptions = data.map(item => ({
+                    value: item.id,
+                    label: item.name,
+                }));
+                setParkOptions(parkOptions);
+
+            } catch (err) {
+                console.error("API ERROR:", err);
+                setParks([]);
+                setParkOptions([]);
+            }
+        };
+        const fetchspeciesData = async () => {
+            try {
+                const res = await api.get("/public/park/species");
+                const data = res.data?.data || [];
+                setSpecies(data);
+
+                const speciesOptions = data.map(item => ({
+                    value: item.id,
+                    label: item.name,
+                }));
+                setSpeciesOptions(speciesOptions);
+
+            } catch (err) {
+                console.error("API ERROR:", err);
+                setSpecies([]);
+                setSpeciesOptions([]);
+            }
+        };
+        fetchstateData();
+        fetchparksData();
+        fetchspeciesData();
+    }, []);
+
+    console.log("States:", states);
+    console.log("Parks:", parks);
+    console.log("Species:",species);
+     
 
     return (
         <>
@@ -40,8 +88,6 @@ const Banner = () => {
                     </div>
                 </div>
             </section>
-
-            {/* Filter Section  */}
             <section id="filter-box-section" className="mb-md-5 mb-3 pb-1">
                 <div className="container-lg">
                     <div className="">
@@ -50,53 +96,59 @@ const Banner = () => {
                                 <div className="d-flex align-items-center flex-wrap">
                                     <div
                                         className="filter-box-items d-flex justify-content-center align-items-center mx-auto flex-lg-nowrap flex-wrap">
-                                        {/* Select Park  */}
+
                                         <div className="filter-item d-flex flex-column bg-white rounded-top-3 position-relative">
                                             <label className="fw-semibold mb-0" htmlFor="park">Select Park</label>
-                                            <Select options={options} placeholder="All/Any" />
 
-                                            {/* OR DIVIDER  */}
+                                            <Select
+                                                className="select-state"
+                                                value={selectedParks}
+                                                onChange={setSelectedParks}
+                                                options={parkoptions}
+                                                closeMenuOnSelect={true}
+                                                blurInputOnSelect={true}
+                                                placeholder="All/Any"
+                                            />
                                             <div
                                                 className="or-divider position-absolute btn-accent rounded-circle d-flex align-items-center justify-content-center">
                                                 <span className="text-white">OR</span>
                                             </div>
                                         </div>
 
-                                        {/* Destination */}
                                         <div
                                             className="filter-item d-flex flex-column bg-white rounded-top-3 ps-4 position-relative">
                                             <label className="fw-semibold mb-0" htmlFor="destination">Destination</label>
-                                            <Select options={options1} placeholder="All/Any" />
+                                            <Select
+                                                className="select-state"
+                                                value={selectedState}
+                                                onChange={setSelectedState}
+                                                options={options}
+                                                closeMenuOnSelect={true}
+                                                blurInputOnSelect={true}
+                                                placeholder="All/Any"
+                                            />
 
-                                            {/* OR DIVIDER  */}
                                             <div
                                                 className="or-divider position-absolute btn-accent rounded-circle d-flex align-items-center justify-content-center">
                                                 <span className="text-white">OR</span>
                                             </div>
                                         </div>
-
-                                        {/* Species  */}
                                         <div
                                             className="filter-item d-flex flex-column bg-white rounded-top-3 ps-4 position-relative">
                                             <label className="fw-semibold mb-0" htmlFor="species">Species</label>
-                                            <Select options={options2} placeholder="All/Any" />
-                                            {/* <select className="form-select select2" id="species" style={{ width: "100%", border: "none" }}>
-                                                <option defaultValue>All / Any</option>
-                                               
-                                            </select> */}
+                                            {/* <Select options={options2} placeholder="All/Any" /> */}
+                                            
+                                              <Select
+                                                className="select-state"
+                                                value={selectedSpecies}
+                                                onChange={setSelectedSpecies}
+                                                options={speciesoptions}
+                                                closeMenuOnSelect={true}
+                                                blurInputOnSelect={true}
+                                                placeholder="All/Any"
+                                            />
                                         </div>
 
-                                        {/* Safari Type  */}
-                                        {/* <div className="filter-item d-flex flex-column bg-white rounded-top-3">
-                                    <label className="fw-semibold mb-0" for="safaritype">Safari Type</label>
-                                    <select className="form-select select2" id="safaritype" style={{width: "100%"}}>
-                                        <option selected>All / Any</option>
-                                        <option>Jeep</option>
-                                        <option>Canter</option>
-                                    </select>
-                                </div>  */}
-
-                                        {/* < Search Button  */}
                                         <a href="/search-result"
                                             className="d-lg-flex justify-content-center align-items-center d-none btn btn-accent rounded-circle"
                                             style={{ width: "40px", height: "40px" }}>
