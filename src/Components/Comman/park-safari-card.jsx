@@ -18,12 +18,9 @@ export default function Parksafari() {
                 page: pageNo,
                 speciesName: species_id,
             },
-            
         });
         return res.data?.data || [];
     };
-
-
     useEffect(() => {
         (async () => {
             setLoading(true);
@@ -42,8 +39,6 @@ export default function Parksafari() {
             setParks(data.slice(0, 6));
         });
     }, []);
-
-
 
     const handleLoadMore = async () => {
         if (loading) return;
@@ -131,12 +126,7 @@ export default function Parksafari({ parks, loading, onLoadMore }) {
             showButton = true;
             navigateTo = "/park-detail";
             break;
-
-
     }
-    // console.log("IMAGE:", parks.display_image);
-
-    
     const joinAndLimitThreeWords = (slug = "", state = "") => {
 
         const slugWords = slug
@@ -231,11 +221,7 @@ export default function Parksafari({ parks, loading, onLoadMore }) {
                             <div className="price-container text-center pb-3 pt-sm-2">
  
                               
-                                    {/* <button
-                                        onClick={() => navigate(`/park-detail/${item.slug}`)}
-                                        className=" btn-sm btn-primary blue-btn-hover border-0 rounded-1 px-3">View
-                                        Details
-                                    </button> */}
+                                
                                     <button
   onClick={() =>
     navigate(`/park-detail/${item.slug}`, {
@@ -251,7 +237,6 @@ export default function Parksafari({ parks, loading, onLoadMore }) {
 >
   View Details
 </button>
-
                               
                             </div>
                         </Card.Body>
