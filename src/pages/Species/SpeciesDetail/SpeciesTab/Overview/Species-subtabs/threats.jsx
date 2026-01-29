@@ -8,18 +8,17 @@ export default function Threats() {
 
   const { tabId, charId } = useParams();
    const { speciesId } = useOutletContext();
-    console.log("overview:",speciesId);
-  // const [threats, setThreats] = useState(null);
+    console.log("Threats:",speciesId);
+
   const [content, setContent] = useState(null);
-  //  const tabs = outletContext?.tabs || [];
+
   useEffect(() => {
     if (!speciesId || !tabId) return;
 
     api.get(`/public/species/tab/${speciesId}`, {
       params: {
-        species_details_characterstic_id: tabId, // ✅ tab id
+        species_details_characterstic_id: tabId, 
         species_characterstics: charId,
-        // ✅ THREAT param
       },
     })
       .then((res) => {
@@ -32,7 +31,6 @@ export default function Threats() {
   console.log("Threats data:", content);
   console.log("Short desc:", content?.short_description);
 
-  // if (!threats) return <p>Loading threats...</p>;
   return (
     <>
       <div>
@@ -45,7 +43,7 @@ export default function Threats() {
         <div>
           <Row className="mb-lg-4">
             <Col xl={5} lg={6} className=" mb-3">
-              {/* <div className="img-1 rounded-3 bg-blue key-info-img mb-3"> */}
+            
                 {content?.image && (
                   <img
                     src={`${import.meta.env.VITE_API_BASE_URLs}${content.image}`}
@@ -54,7 +52,6 @@ export default function Threats() {
                     style={{maxHeight:"150px",objectFit:"cover"}}
                   />
                 )}
-              {/* </div> */}
             </Col>
             <Col md={7}>
               <div>

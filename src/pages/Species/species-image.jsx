@@ -20,7 +20,8 @@ const Speciesimage = () => {
             })
             .catch(err => console.error(err));
     }, []);
-
+  
+    console.log("Species Data:",data);
    const renderSpecies = () => {
   return data
     .slice(0, visibleCount)

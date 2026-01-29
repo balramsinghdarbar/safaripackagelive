@@ -58,8 +58,7 @@ const SharedSafari = () => {
         label: item.name,
     }));
 
-
-
+ useEffect(() => {
     const fetchSafaris = async (
         pageNo = 1,
         stateId = null,
@@ -95,8 +94,6 @@ const SharedSafari = () => {
             setTotalCount(0);
         }
     };
-
-    useEffect(() => {
 
         fetchSafaris(
             page,
@@ -329,7 +326,6 @@ const SharedSafari = () => {
                                         key={num}
                                         className={`page-btn page btn-sm  ${page === num ? "disabled" : ""
                                             }`}
-                                        // className={page === num ? " active" : ""}
                                         onClick={() => setPage(num)}
                                     >
                                         {num}

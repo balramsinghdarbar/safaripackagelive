@@ -74,9 +74,10 @@ const SafariCard = ({ item, pkg }) => {
     const isSpeciesPackagePage =
     location.pathname.startsWith(`/species-detail/${speciesId}`) &&
     location.pathname.endsWith("/packages");
-    // const isHomePage =
-    // location.pathname.startsWith(`/`) &&
-    // location.pathname.endsWith("/joinSharedSafari");
+   const isHomePage =
+  location.pathname === "/" ||
+  location.pathname === "/joinSharedSafari";
+
 
     let buttonText = "";
     let navigateTo = "";
@@ -92,10 +93,10 @@ const SafariCard = ({ item, pkg }) => {
     buttonText = "View Detail";
     navigateTo = "/SafariDetail";
   }
-//   if(isHomePage){
-//     buttonText = "View Detail";
-//     navigateTo = "/SafariDetail";
-//   }
+  if(isHomePage){
+    buttonText = "View Detail";
+    navigateTo = "/SafariDetail";
+  }
   if (isParkSafariPage) {
     buttonText = "View Detail";
     navigateTo = "/SafariDetail";

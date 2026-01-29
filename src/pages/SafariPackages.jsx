@@ -55,7 +55,8 @@ const SafariPackages = () => {
         value: item.id,
         label: item.name,
     }));
-
+    
+ useEffect(() => {
     const fetchSafariPackages = async () => {
         try {
             const res = await api.get("/public/safari-package", {
@@ -73,7 +74,7 @@ const SafariPackages = () => {
         }
     };
 
-    useEffect(() => {
+   
         fetchSafariPackages();
     }, [selectedState,selectedPark,selectedSpecies]);
 
@@ -104,7 +105,6 @@ const isSpeciesPackagePage =
                         selectedState={selectedState}
                         selectedPark={selectedPark}
                         selectedSpecies={selectedSpecies}
-
                         stateOptions={stateOptions}
                         parkOptions={parkOptions}
                         speciesOptions={speciesOptions}
